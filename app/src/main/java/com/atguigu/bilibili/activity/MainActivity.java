@@ -1,96 +1,86 @@
 package com.atguigu.bilibili.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import android.util.DisplayMetrics;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.widget.ImageButton;
+import android.widget.ListView;
 
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.fragment.LeftMenuFragment;
-import com.slidingmenu.lib.SlidingMenu;
-import com.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.atguigu.bilibili.adapter.MainViewPagerAdapter;
+import com.atguigu.bilibili.fragment.BaseFragment;
+import com.atguigu.bilibili.fragment.FaXianFragment;
+import com.atguigu.bilibili.fragment.FenQuFragment;
+import com.atguigu.bilibili.fragment.TuiJianFragment;
+import com.atguigu.bilibili.fragment.ZhiBoFragment;
+import com.atguigu.bilibili.fragment.ZhuiFanFragment;
+import com.atguigu.bilibili.view.CircleImageView;
 
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 
-public class MainActivity extends SlidingFragmentActivity {
+public class MainActivity extends AppCompatActivity {
 
-    public static final String LEFTMENU_TAG = "leftmenu_tag";
-    public static final String CONENT_TAG = "conent_tag";
-
-    int screenWidth;
+    @InjectView(R.id.ib_main_lift)
+    ImageButton ibMainLift;
+    @InjectView(R.id.toolbar_user_avatar)
+    CircleImageView toolbarUserAvatar;
+    @InjectView(R.id.toolBar)
+    Toolbar toolBar;
+    @InjectView(R.id.tabLayout)
+    TabLayout tabLayout;
+    @InjectView(R.id.appbar)
+    AppBarLayout appbar;
+    @InjectView(R.id.viewpager)
+    ViewPager viewpager;
+    @InjectView(R.id.coordinatorlayout)
+    CoordinatorLayout coordinatorlayout;
+    @InjectView(R.id.listview)
+    ListView listview;
+    @InjectView(R.id.activity_main)
+    DrawerLayout activityMain;
+    private ArrayList<BaseFragment> fragments;
+    private MainViewPagerAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //1.设置主页面
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-        DisplayMetrics out = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(out);
-        screenWidth = out.widthPixels;
-        //2.设置左侧菜单
-        setBehindContentView(R.layout.leftmenu);
-
-        //3.设置右侧菜单
-        SlidingMenu slidingMenu = getSlidingMenu();
-//        slidingMenu.setSecondaryMenu(R.layout.leftmenu);
-
-
-        //4.设置模式：左侧+主页；左侧+主页+右侧；主页+右侧
-        slidingMenu.setMode(SlidingMenu.LEFT);
-
-        //5.设置滑动的模式：全屏，边缘，不可以滑动
-        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-
-        //6.设置主页面占的宽度dip
-        //  slidingMenu.setBehindOffset(DensityUtil.dip2px(this,200));
-        slidingMenu.setBehindOffset((int) (screenWidth * 0.456));
-
         initFragment();
-
-        //初始化
-        initView();
         initData();
-        initListener();
 
     }
 
     private void initData() {
 
-    }
+        //设置适配器
+        adapter = new MainViewPagerAdapter(getSupportFragmentManager(), fragments);
+        viewpager.setAdapter(adapter);
 
-    private void initListener() {
+        tabLayout.setupWithViewPager(viewpager);
+        tabLayout.setTabMode(tabLayout.MODE_FIXED);
 
-    }
-
-    private void initView() {
     }
 
     /**
      * 初始化Fragment
      */
     private void initFragment() {
-        //1.得到事务
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        //2.替换:左侧菜单和主要
-        ft.replace(R.id.fl_leftmenu, new LeftMenuFragment(), LEFTMENU_TAG);
-
-        //3.提交
-        ft.commit();
-
-//        getSupportFragmentManager().beginTransaction().replace(R.id.fl_leftmenu,new LeftMenuFragment(), LEFTMENU_TAG).replace(R.id.fl_content,new ContentFragment(),  CONENT_TAG).commit();
-
-    }
-
-    /**
-     * 得到左侧菜单
-     *
-     * @return
-     */
-    public LeftMenuFragment getLeftMenuFragment() {
-        //找同一个实例
-        return (LeftMenuFragment) getSupportFragmentManager().findFragmentByTag(LEFTMENU_TAG);
+        fragments = new ArrayList<>();
+        fragments.add(new ZhiBoFragment());
+        fragments.add(new TuiJianFragment());
+        fragments.add(new ZhuiFanFragment());
+        fragments.add(new FenQuFragment());
+        fragments.add(new FaXianFragment());
     }
 
 }
