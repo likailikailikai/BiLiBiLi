@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -68,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout llJifen;
     @InjectView(R.id.ll_huancun)
     LinearLayout llHuancun;
-    @InjectView(R.id.view)
-    View view;
     @InjectView(R.id.ll_shaohou)
     LinearLayout llShaohou;
     @InjectView(R.id.ll_shoucang)
@@ -80,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout llGuanzhu;
     @InjectView(R.id.ll_qianbao)
     LinearLayout llQianbao;
-    @InjectView(R.id.view2)
-    View view2;
     @InjectView(R.id.ll_zhuti)
     LinearLayout llZhuti;
     @InjectView(R.id.ll_shezhi)
@@ -92,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout activityMain;
     private ArrayList<BaseFragment> fragments;
     private MainViewPagerAdapter adapter;
+
+    private boolean isOpen = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -188,5 +187,67 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "设置", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    private int startY;
+    private int startX;
+    private boolean isScrollY;
+    private boolean isFirst;
+
+    //tollBar 回弹效果
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        int eventY = (int) ev.getY();
+        int eventX = (int) ev.getX();
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                startY = eventY;
+                startX = eventX;
+                isFirst = true;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (isFirst) {
+                    if (Math.abs(eventX - startX) > Math.abs(eventY - startY) && Math.abs(eventX - startX) > toolBar.getHeight()*0.30) {
+                        isScrollY = false;
+                        isFirst = false;
+                        appbar.setExpanded(isOpen);
+                    } else if (Math.abs(eventY - startY) > Math.abs(eventX - startX) && Math.abs(eventY - startY) > toolBar.getHeight()*0.30) {
+                        isScrollY = true;
+                        isFirst = false;
+                    }
+                }
+                if (isOpen) {
+                    if (startY < eventY) {
+                        startY = eventY;
+                    }
+                } else {
+                    if (startY > eventY) {
+                        startY = eventY;
+                    }
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                if (isScrollY) {
+                    if (isOpen) {
+                        if (startY - eventY > toolBar.getHeight() * 0.36) {
+                            appbar.setExpanded(false);
+                            isOpen = false;
+                        } else {
+                            appbar.setExpanded(true);
+                            isOpen = true;
+                        }
+                    } else {
+                        if (eventY - startY > toolBar.getHeight() * 0.36) {
+                            appbar.setExpanded(true);
+                            isOpen = true;
+                        } else {
+                            appbar.setExpanded(false);
+                            isOpen = false;
+                        }
+                    }
+                }
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
     }
 }
