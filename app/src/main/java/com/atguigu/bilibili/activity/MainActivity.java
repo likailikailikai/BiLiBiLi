@@ -8,8 +8,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ListView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.adapter.MainViewPagerAdapter;
@@ -25,13 +29,23 @@ import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
+
 
     @InjectView(R.id.ib_main_lift)
     ImageButton ibMainLift;
     @InjectView(R.id.toolbar_user_avatar)
     CircleImageView toolbarUserAvatar;
+    @InjectView(R.id.tv_main)
+    TextView tvMain;
+    @InjectView(R.id.ib_main_game)
+    ImageButton ibMainGame;
+    @InjectView(R.id.ib_main_down)
+    ImageButton ibMainDown;
+    @InjectView(R.id.ib_main_search)
+    ImageButton ibMainSearch;
     @InjectView(R.id.toolBar)
     Toolbar toolBar;
     @InjectView(R.id.tabLayout)
@@ -42,8 +56,38 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewpager;
     @InjectView(R.id.coordinatorlayout)
     CoordinatorLayout coordinatorlayout;
-    @InjectView(R.id.listview)
-    ListView listview;
+    @InjectView(R.id.toolbar_user_left)
+    CircleImageView toolbarUserLeft;
+    @InjectView(R.id.shang)
+    RelativeLayout shang;
+    @InjectView(R.id.ll_home)
+    LinearLayout llHome;
+    @InjectView(R.id.ll_huiyuan)
+    LinearLayout llHuiyuan;
+    @InjectView(R.id.ll_jifen)
+    LinearLayout llJifen;
+    @InjectView(R.id.ll_huancun)
+    LinearLayout llHuancun;
+    @InjectView(R.id.view)
+    View view;
+    @InjectView(R.id.ll_shaohou)
+    LinearLayout llShaohou;
+    @InjectView(R.id.ll_shoucang)
+    LinearLayout llShoucang;
+    @InjectView(R.id.ll_lishi)
+    LinearLayout llLishi;
+    @InjectView(R.id.ll_guanzhu)
+    LinearLayout llGuanzhu;
+    @InjectView(R.id.ll_qianbao)
+    LinearLayout llQianbao;
+    @InjectView(R.id.view2)
+    View view2;
+    @InjectView(R.id.ll_zhuti)
+    LinearLayout llZhuti;
+    @InjectView(R.id.ll_shezhi)
+    LinearLayout llShezhi;
+    @InjectView(R.id.relativelayout)
+    RelativeLayout relativelayout;
     @InjectView(R.id.activity_main)
     DrawerLayout activityMain;
     private ArrayList<BaseFragment> fragments;
@@ -83,4 +127,66 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(new FaXianFragment());
     }
 
+    @OnClick({R.id.ib_main_lift, R.id.toolbar_user_avatar, R.id.tv_main, R.id.ib_main_game, R.id.ib_main_down, R.id.ib_main_search, R.id.toolbar_user_left, R.id.ll_home, R.id.ll_huiyuan, R.id.ll_jifen, R.id.ll_huancun, R.id.ll_shaohou, R.id.ll_shoucang, R.id.ll_lishi, R.id.ll_guanzhu, R.id.ll_qianbao, R.id.ll_zhuti, R.id.ll_shezhi,R.id.ib_main_yueliang})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ib_main_lift:
+                Toast.makeText(MainActivity.this, "进入左侧菜单", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.toolbar_user_avatar:
+                Toast.makeText(MainActivity.this, "进入左侧菜单", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.tv_main:
+                Toast.makeText(MainActivity.this, "进入左侧菜单", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ib_main_game:
+                Toast.makeText(MainActivity.this, "进入游戏中心", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ib_main_down:
+                Toast.makeText(MainActivity.this, "进入管理缓存", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ib_main_search:
+                Toast.makeText(MainActivity.this, "搜索", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.toolbar_user_left:
+                Toast.makeText(MainActivity.this, "登录", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ib_main_yueliang:
+                Toast.makeText(MainActivity.this, "更换皮肤", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_home:
+                Toast.makeText(MainActivity.this, "首页", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_huiyuan:
+                Toast.makeText(MainActivity.this, "进入游戏中心", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_jifen:
+                Toast.makeText(MainActivity.this, "会员积分", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_huancun:
+                Toast.makeText(MainActivity.this, "离线缓存", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_shaohou:
+                Toast.makeText(MainActivity.this, "稍后再看", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_shoucang:
+                Toast.makeText(MainActivity.this, "收藏", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_lishi:
+                Toast.makeText(MainActivity.this, "历史记录", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_guanzhu:
+                Toast.makeText(MainActivity.this, "关注", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_qianbao:
+                Toast.makeText(MainActivity.this, "钱包", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_zhuti:
+                Toast.makeText(MainActivity.this, "主题", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_shezhi:
+                Toast.makeText(MainActivity.this, "设置", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
 }

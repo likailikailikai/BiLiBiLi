@@ -9,7 +9,7 @@ import android.widget.TextView;
 /**
  * Created by 情v枫 on 2017/3/21.
  * <p>
- * 作用：追番
+ * 作用：
  */
 
 public class ZhuiFanFragment extends BaseFragment {
@@ -31,7 +31,7 @@ public class ZhuiFanFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
-        textView.setText("追番");
+        textView.setText("直播");
     }
 
 }

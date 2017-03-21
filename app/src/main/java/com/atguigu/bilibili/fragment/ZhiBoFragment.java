@@ -1,9 +1,23 @@
 package com.atguigu.bilibili.fragment;
 
-import android.graphics.Color;
-import android.view.Gravity;
+import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
+import android.view.ViewGroup;
+
+import com.alibaba.fastjson.JSON;
+import com.atguigu.bilibili.R;
+import com.atguigu.bilibili.bean.HomeBean;
+import com.atguigu.bilibili.utils.Constants;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import okhttp3.Call;
 
 
 /**
@@ -13,15 +27,16 @@ import android.widget.TextView;
  */
 
 public class ZhiBoFragment extends BaseFragment {
-    private TextView textView;
+
+    @InjectView(R.id.recyclerview)
+    RecyclerView recyclerview;
+
 
     @Override
     public View initView() {
-        textView = new TextView(mContext);
-        textView.setTextSize(20);
-        textView.setGravity(Gravity.CENTER);
-        textView.setTextColor(Color.RED);
-        return textView;
+        View view = View.inflate(mContext, R.layout.fragment_zhi_bo, null);
+        ButterKnife.inject(this, view);
+        return null;
     }
 
     /**
@@ -31,7 +46,44 @@ public class ZhiBoFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
-        textView.setText("直播");
+       // getDataFromNet();
+
     }
 
+//    private void getDataFromNet() {
+//        OkHttpUtils
+//                .get()
+//                .url(Constants.BASE_URL)
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//                        Log.e("TAG", "联网成功=="+e.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        Log.e("TAG", "连网失败== ");
+//                        processData(response);
+//                    }
+//                });
+//    }
+//
+//
+//    /**
+//     * 三种解析方式：fastjson解析数据、gson和手动解析数据
+//     * @param response
+//     */
+//    private void processData(String response) {
+//        HomeBean homeBean = JSON.parseObject(response,HomeBean.class);
+//        Log.e("TAG", "数据解析成功=="+homeBean.getData().getBanner().get(0).getImg());
+//
+//
+//    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
 }
