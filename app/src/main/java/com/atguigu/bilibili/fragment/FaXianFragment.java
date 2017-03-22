@@ -1,25 +1,30 @@
 package com.atguigu.bilibili.fragment;
 
-import android.annotation.TargetApi;
-import android.os.Build;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.bean.DiscoverTagBean;
+import com.atguigu.bilibili.bean.FaXianBean;
 import com.atguigu.bilibili.utils.Constants;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.google.gson.Gson;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
+import org.xutils.common.Callback;
+import org.xutils.common.util.LogUtil;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.util.List;
+import java.util.zip.Inflater;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import okhttp3.Call;
+import butterknife.OnClick;
 
 
 /**
@@ -30,12 +35,31 @@ import okhttp3.Call;
 
 public class FaXianFragment extends BaseFragment {
 
+
+
+
     @InjectView(R.id.tv_main_faxian)
     TextView tvMainFaxian;
     @InjectView(R.id.flowlayout)
     TagFlowLayout flowlayout;
+    @InjectView(R.id.ll_xingqu)
+    LinearLayout llXingqu;
+    @InjectView(R.id.ll_huati)
+    LinearLayout llHuati;
+    @InjectView(R.id.ll_huodong)
+    LinearLayout llHuodong;
+    @InjectView(R.id.ll_xiaoheiwu)
+    LinearLayout llXiaoheiwu;
+    @InjectView(R.id.ll_yuanchuang)
+    LinearLayout llYuanchuang;
+    @InjectView(R.id.ll_quanqu)
+    LinearLayout llQuanqu;
+    @InjectView(R.id.ll_youxizhongxin)
+    LinearLayout llYouxizhongxin;
+    @InjectView(R.id.ll_zhoubian_shop)
+    LinearLayout llZhoubianShop;
+    private LayoutInflater mInflater;
 
-//    private List<DiscoverTagBean.DataBean.ListBean> dataBeanList;
 
     @Override
     public View initView() {
@@ -51,31 +75,121 @@ public class FaXianFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
-//        getDataFromNet(Constants.DISCOVER_TAG);
+        getDataFromNet();
     }
 
-//    private void getDataFromNet(String url) {
-//        OkHttpUtils
-//                .get()
-//                .url(url)
-//                .build()
-//                .execute(new StringCallback() {
-//                    @Override
-//                    public void onError(Call call, Exception e, int id) {
-//                        Toast.makeText(mContext, "TagFragment联网失败", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String response, int id) {
-//                        processData(response);
-//                    }
-//                });
-//    }
-//
-//    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-//    private void processData(String json) {
-//    }
+    private void getDataFromNet() {
+        RequestParams reques = new RequestParams(Constants.DISCOVER_TAG);
+        x.http().get(reques, new Callback.CacheCallback<String>() {
+            @Override
+            public boolean onCache(String result) {
+                return false;
+            }
 
+            @Override
+            public void onSuccess(String result) {
+                LogUtil.e("onSuccess==" + result);
+                processData(result);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                LogUtil.e("onError==" + ex.getMessage());
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+                LogUtil.e("onCancelled==" + cex.getMessage());
+            }
+
+            @Override
+            public void onFinished() {
+                LogUtil.e("onFinished==");
+            }
+        });
+
+    }
+
+    /**
+     *使用Gson解析JSON
+     * @param json
+     */
+    //适配器代码
+    private void processData(String json) {
+        mInflater = LayoutInflater.from(mContext);
+        FaXianBean faXianBean = paraseJson(json);
+        List<FaXianBean.DataBean.ListBean> list = faXianBean.getData().getList();
+
+        String[] mVals = new String[list.size()];
+        for (int i = 0; i < mVals.length; i++) {
+            mVals[i] = list.get(i).getKeyword();
+
+        }
+
+        flowlayout.setAdapter(new TagAdapter<String>(mVals)
+        {
+            @Override
+            public View getView(FlowLayout parent, int position, String s)
+            {
+                TextView tv = (TextView) mInflater.inflate(R.layout.tv,
+                        flowlayout, false);
+                tv.setText(s);
+                return tv;
+            }
+        });
+
+
+
+    }
+
+    /**
+     * json解析数据
+     *
+     * @param json
+     * @return
+     */
+    private FaXianBean paraseJson(String json) {
+
+        FaXianBean netAudioBean = new Gson().fromJson(json, FaXianBean.class);
+        return netAudioBean;
+    }
+
+
+    @OnClick({R.id.tv_main_faxian, R.id.flowlayout, R.id.ll_xingqu, R.id.ll_huati, R.id.ll_huodong, R.id.ll_xiaoheiwu, R.id.ll_yuanchuang, R.id.ll_quanqu, R.id.ll_youxizhongxin, R.id.ll_zhoubian_shop})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_main_faxian:
+                Toast.makeText(mContext, "搜索", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.flowlayout:
+                Toast.makeText(mContext, "都在搜", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_xingqu:
+                Toast.makeText(mContext, "兴趣", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_huati:
+                Toast.makeText(mContext, "话题", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_huodong:
+                Toast.makeText(mContext, "活动", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_xiaoheiwu:
+                Toast.makeText(mContext, "小黑屋", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_yuanchuang:
+                Toast.makeText(mContext, "原创排行榜", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_quanqu:
+                Toast.makeText(mContext, "全区排行榜", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_youxizhongxin:
+                Toast.makeText(mContext, "游戏中心", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_zhoubian_shop:
+                Toast.makeText(mContext, "周边商城", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
