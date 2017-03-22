@@ -6,11 +6,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.bean.HomeBean;
-import com.atguigu.bilibili.utils.Constants;
+import com.atguigu.bilibili.bean.BannersBean;
+import com.atguigu.bilibili.bean.ChannelBean;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
@@ -18,6 +19,9 @@ import com.youth.banner.transformer.BackgroundToForegroundTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * Created by 情v枫 on 2017/3/21.
@@ -31,14 +35,14 @@ public class HomeAdapter extends RecyclerView.Adapter {
     public static final int BANNER = 0;
     private final Context mContext;
     private final LayoutInflater inflater;
-    private final HomeBean.DataBean data;
+    private final BannersBean.DataBean data;
 
     /**
      * 当前类型
      */
     public int currentType = BANNER;
 
-    public HomeAdapter(Context mContext, HomeBean.DataBean data) {
+    public HomeAdapter(Context mContext, BannersBean.DataBean data) {
         this.mContext = mContext;
         this.data = data;
         inflater = LayoutInflater.from(mContext);
@@ -89,6 +93,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
         }
     }
 
+
     class BannerViewHolder extends RecyclerView.ViewHolder {
 
         private final Context mContext;
@@ -101,11 +106,16 @@ public class HomeAdapter extends RecyclerView.Adapter {
         }
 
 
-        public void setData(List<HomeBean.DataBean.BannerBean> bean) {
+        public void setData(List<BannersBean.DataBean.BannerBean> bean) {
             //1、得到数据
             //2、设置Banner数据
             List<String> images = new ArrayList<>();
             for (int i = 0; i < bean.size(); i++) {
+                images.add(bean.get(i).getImg());
+                images.add(bean.get(i).getImg());
+                images.add(bean.get(i).getImg());
+                images.add(bean.get(i).getImg());
+                images.add(bean.get(i).getImg());
                 images.add(bean.get(i).getImg());
             }
             //简单使用
