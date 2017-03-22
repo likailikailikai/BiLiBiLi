@@ -10,8 +10,10 @@ import android.widget.ImageView;
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.bean.HomeBean;
 import com.atguigu.bilibili.utils.Constants;
+import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
+import com.youth.banner.transformer.BackgroundToForegroundTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,18 @@ public class HomeAdapter extends RecyclerView.Adapter {
     private final LayoutInflater inflater;
     private final HomeBean.DataBean data;
 
+    /**
+     * 当前类型
+     */
+    public int currentType = BANNER;
+
+    public HomeAdapter(Context mContext, HomeBean.DataBean data) {
+        this.mContext = mContext;
+        this.data = data;
+        inflater = LayoutInflater.from(mContext);
+    }
+
+
     @Override
     public int getItemCount() {
         return 1;
@@ -43,16 +57,6 @@ public class HomeAdapter extends RecyclerView.Adapter {
         return currentType;
     }
 
-    /**
-     * 当前类型
-     */
-    public int currentType = BANNER;
-
-    public HomeAdapter(Context mContext, HomeBean.DataBean data) {
-        this.mContext = mContext;
-        this.data = data;
-        inflater = LayoutInflater.from(mContext);
-    }
 
     /**
      * 当前的类型
@@ -96,14 +100,26 @@ public class HomeAdapter extends RecyclerView.Adapter {
         }
 
 
-        public void setData(List<HomeBean.DataBean.BannerBean> banner) {
+        public void setData(List<HomeBean.DataBean.BannerBean> bean) {
             //1、得到数据
             //2、设置Banner数据
             List<String> images = new ArrayList<>();
-            for (int i = 0; i < banner.size(); i++) {
-                images.add(Constants.BASE_URL + banner.get(i).getImg());
+            for (int i = 0; i < bean.size(); i++) {
+                images.add(bean.get(i).getImg());
             }
-
+            //简单使用
+            banner.setImages(images)
+                    .setImageLoader(new ImageLoader() {
+                        @Override
+                        public void displayImage(Context context, Object path, ImageView imageView) {
+                            //具体方法内容自己去选择，次方法是为了减少banner过多的依赖第三方包，所以将这个权限开放给使用者去选择
+                            Glide.with(context).load(path).crossFade().into(imageView);
+                        }
+                    })
+                    .start();
+            //设置样式
+            banner.setBannerAnimation(BackgroundToForegroundTransformer.class);
+            //3、设置banner的点击事件
         }
     }
 }
