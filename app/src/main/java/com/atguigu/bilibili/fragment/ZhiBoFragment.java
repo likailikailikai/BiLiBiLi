@@ -1,7 +1,6 @@
 package com.atguigu.bilibili.fragment;
 
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +11,6 @@ import com.atguigu.bilibili.adapter.HomeAdapter;
 import com.atguigu.bilibili.bean.HomeBean;
 import com.atguigu.bilibili.utils.Constants;
 import com.atguigu.bilibili.view.CustomEmptyView;
-import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -41,7 +39,7 @@ public class ZhiBoFragment extends BaseFragment {
     public View initView() {
         View view = View.inflate(mContext, R.layout.fragment_zhi_bo, null);
         ButterKnife.inject(this, view);
-        return null;
+        return view;
     }
 
     /**
@@ -84,10 +82,10 @@ public class ZhiBoFragment extends BaseFragment {
         recyclerview.setAdapter(adapter);
 
        GridLayoutManager manager = new GridLayoutManager(mContext,1);
-
+        Log.e("TAG", "jjjjjj");
         //设置布局管理器
         recyclerview.setLayoutManager(manager);
-
+        Log.e("TAG", "hhhhhh");
     }
 
     @Override

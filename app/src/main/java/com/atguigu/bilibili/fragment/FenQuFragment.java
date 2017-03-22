@@ -5,6 +5,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.atguigu.bilibili.R;
+
 
 /**
  * Created by 情v枫 on 2017/3/21.
@@ -13,15 +15,11 @@ import android.widget.TextView;
  */
 
 public class FenQuFragment extends BaseFragment {
-    private TextView textView;
 
     @Override
     public View initView() {
-        textView = new TextView(mContext);
-        textView.setTextSize(20);
-        textView.setGravity(Gravity.CENTER);
-        textView.setTextColor(Color.RED);
-        return textView;
+        View view = View.inflate(mContext, R.layout.fragment_fen_qu,null);
+        return view;
     }
 
     /**
@@ -31,7 +29,6 @@ public class FenQuFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
-        textView.setText("分区");
     }
 
 }

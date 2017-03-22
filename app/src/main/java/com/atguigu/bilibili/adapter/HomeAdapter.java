@@ -2,6 +2,7 @@ package com.atguigu.bilibili.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,7 +82,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
      */
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (getItemViewType(position) == BANNER) {
+        if (position == BANNER) {
             BannerViewHolder viewHolder = (BannerViewHolder) holder;
             //绑定数据
             viewHolder.setData(data.getBanner());
@@ -113,10 +114,16 @@ public class HomeAdapter extends RecyclerView.Adapter {
                         @Override
                         public void displayImage(Context context, Object path, ImageView imageView) {
                             //具体方法内容自己去选择，次方法是为了减少banner过多的依赖第三方包，所以将这个权限开放给使用者去选择
-                            Glide.with(context).load(path).crossFade().into(imageView);
+                            Glide
+                                    .with(context)
+                                    .load(path)
+                                    .crossFade()
+                                    .into(imageView);
+                            Log.e("TAG", "图片加载");
                         }
                     })
                     .start();
+            Log.e("TAG", "开始banner");
             //设置样式
             banner.setBannerAnimation(BackgroundToForegroundTransformer.class);
             //3、设置banner的点击事件
