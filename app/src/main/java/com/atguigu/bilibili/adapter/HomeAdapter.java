@@ -6,12 +6,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.bean.BannersBean;
-import com.atguigu.bilibili.bean.ChannelBean;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
@@ -20,8 +20,9 @@ import com.youth.banner.transformer.BackgroundToForegroundTransformer;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
+
 
 /**
  * Created by 情v枫 on 2017/3/21.
@@ -33,6 +34,8 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
 
     public static final int BANNER = 0;
+    public static final int LINEARLAYOUT = 1;
+
     private final Context mContext;
     private final LayoutInflater inflater;
     private final BannersBean.DataBean data;
@@ -41,6 +44,16 @@ public class HomeAdapter extends RecyclerView.Adapter {
      * 当前类型
      */
     public int currentType = BANNER;
+    @InjectView(R.id.ll_anchor)
+    LinearLayout llAnchor;
+    @InjectView(R.id.ll_center)
+    LinearLayout llCenter;
+    @InjectView(R.id.ll_video)
+    LinearLayout llVideo;
+    @InjectView(R.id.ll_search)
+    LinearLayout llSearch;
+    @InjectView(R.id.ll_category)
+    LinearLayout llCategory;
 
     public HomeAdapter(Context mContext, BannersBean.DataBean data) {
         this.mContext = mContext;
@@ -51,13 +64,15 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 1;
+        return 2;
     }
 
     @Override
     public int getItemViewType(int position) {
         if (position == BANNER) {
             currentType = BANNER;
+        } else if (position == LINEARLAYOUT) {
+            currentType = LINEARLAYOUT;
         }
         return currentType;
     }
@@ -74,6 +89,8 @@ public class HomeAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == BANNER) {
             return new BannerViewHolder(mContext, inflater.inflate(R.layout.banner_viewpager, null));
+        } else if (viewType == LINEARLAYOUT) {
+            return new LinearlayoutViewHolder(mContext, inflater.inflate(R.layout.linearlayout_viewpager, null));
         }
         return null;
     }
@@ -90,6 +107,40 @@ public class HomeAdapter extends RecyclerView.Adapter {
             BannerViewHolder viewHolder = (BannerViewHolder) holder;
             //绑定数据
             viewHolder.setData(data.getBanner());
+        } else if (position == LINEARLAYOUT) {
+            LinearlayoutViewHolder viewHolder = (LinearlayoutViewHolder) holder;
+        }
+    }
+
+    @OnClick({R.id.ll_anchor, R.id.ll_center, R.id.ll_video, R.id.ll_search, R.id.ll_category})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_anchor:
+                Toast.makeText(mContext, "关注", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_center:
+                Toast.makeText(mContext, "中心", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_video:
+                Toast.makeText(mContext, "视频", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_search:
+                Toast.makeText(mContext, "搜索", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_category:
+                Toast.makeText(mContext, "分类", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+    class LinearlayoutViewHolder extends RecyclerView.ViewHolder {
+
+        public LinearlayoutViewHolder(View itemView) {
+            super(itemView);
+        }
+
+        public LinearlayoutViewHolder(Context mContext, View inflate) {
+            super(inflate);
         }
     }
 

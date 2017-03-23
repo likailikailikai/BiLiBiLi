@@ -62,7 +62,7 @@ public class ChannelAdapter extends BaseAdapter {
         viewHolder.tvChannel.setText(childrenBean.getName());
         //Glide请求图片
         Glide.with(mContext)
-                .load(Constants.FENQU_TAG + childrenBean.getChildren())
+                .load(childrenBean.getLogo())
                 .crossFade()
                 .into(viewHolder.ivChannel);
 
