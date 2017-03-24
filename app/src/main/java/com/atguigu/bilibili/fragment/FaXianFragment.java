@@ -1,5 +1,6 @@
 package com.atguigu.bilibili.fragment;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -7,6 +8,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atguigu.bilibili.R;
+import com.atguigu.bilibili.activity.InterestActivity;
+import com.atguigu.bilibili.activity.TopicActivity;
 import com.atguigu.bilibili.bean.FaXianBean;
 import com.atguigu.bilibili.utils.Constants;
 import com.google.gson.Gson;
@@ -165,10 +168,14 @@ public class FaXianFragment extends BaseFragment {
                 Toast.makeText(mContext, "都在搜", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ll_xingqu:
-                Toast.makeText(mContext, "兴趣", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "兴趣", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext,InterestActivity.class);
+                mContext.startActivity(intent);
                 break;
             case R.id.ll_huati:
-                Toast.makeText(mContext, "话题", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "话题", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(mContext,TopicActivity.class);
+                mContext.startActivity(intent1);
                 break;
             case R.id.ll_huodong:
                 Toast.makeText(mContext, "活动", Toast.LENGTH_SHORT).show();

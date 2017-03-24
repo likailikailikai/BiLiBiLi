@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.activity.WebViewActivity;
@@ -40,7 +40,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
 
     public static final int BANNER = 0;
-    public static final int LINEARLAYOUT = 1;
+    public static final int HUIHUA = 1;
 
     private final Context mContext;
     private final LayoutInflater inflater;
@@ -50,6 +50,8 @@ public class HomeAdapter extends RecyclerView.Adapter {
      * 当前类型
      */
     public int currentType = BANNER;
+    private HuihuaAdapter adapter;
+
 
     public HomeAdapter(Context mContext, ZhiBoBean.DataBean data) {
         this.mContext = mContext;
@@ -60,15 +62,15 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 6;
     }
 
     @Override
     public int getItemViewType(int position) {
         if (position == BANNER) {
             currentType = BANNER;
-        } else if (position == LINEARLAYOUT) {
-            currentType = LINEARLAYOUT;
+        } else if (position == HUIHUA) {
+            currentType = HUIHUA;
         }
         return currentType;
     }
@@ -85,8 +87,8 @@ public class HomeAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == BANNER) {
             return new BannerViewHolder(mContext, inflater.inflate(R.layout.banner_viewpager, null));
-        } else if (viewType == LINEARLAYOUT) {
-            return new LinearlayoutViewHolder(mContext, inflater.inflate(R.layout.linearlayout_viewpager, null));
+        } else if (viewType == HUIHUA) {
+            return new HuihuaViewHolder(mContext, inflater.inflate(R.layout.huihua_viewpager, null));
         }
         return null;
     }
@@ -99,27 +101,51 @@ public class HomeAdapter extends RecyclerView.Adapter {
      */
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (position == BANNER) {
+        if (getItemViewType(position) == BANNER) {
             BannerViewHolder viewHolder = (BannerViewHolder) holder;
             //绑定数据
             viewHolder.setData(data.getBanner());
-        } else if (position == LINEARLAYOUT) {
-            LinearlayoutViewHolder viewHolder = (LinearlayoutViewHolder) holder;
+        }  else if (getItemViewType(position) == HUIHUA) {
+            HuihuaViewHolder viewHolder = (HuihuaViewHolder) holder;
+            viewHolder.setData(data.getPartitions().get(position));
         }
     }
 
-
-    class LinearlayoutViewHolder extends RecyclerView.ViewHolder {
-
-        public LinearlayoutViewHolder(View itemView) {
+    class HuihuaViewHolder extends RecyclerView.ViewHolder {
+        @InjectView(R.id.iv_huuihua)
+        ImageView ivHuuihua;
+        @InjectView(R.id.tvzhibo)
+        TextView tvzhibo;
+        @InjectView(R.id.tvhuihua1)
+        TextView tvhuihua1;
+        @InjectView(R.id.rl_huuihua_tab)
+        RelativeLayout rlHuuihuaTab;
+        @InjectView(R.id.ll_huuihua_tab)
+        LinearLayout llHuuihuaTab;
+        @InjectView(R.id.gv_huihuazhuanqu)
+        GridView gvHuihuazhuanqu;
+        @InjectView(R.id.btn_huihua_bottom)
+        Button btnHuihuaBottom;
+        @InjectView(R.id.iv_huihua_shuaxin)
+        TextView ivHuihuaShuaxin;
+        @InjectView(R.id.tv_huihuabiaoti)
+        TextView tvhuihuabiaoti;
+        public HuihuaViewHolder(Context mContext, View itemView) {
             super(itemView);
+            ButterKnife.inject(this,itemView);
         }
 
-        public LinearlayoutViewHolder(Context mContext, View inflate) {
-            super(inflate);
+        public void setData(ZhiBoBean.DataBean.PartitionsBean partitionsBean) {
+            List<ZhiBoBean.DataBean.PartitionsBean> partitions = data.getPartitions();
+            Glide.with(mContext).load(partitionsBean.getPartition().getSub_icon().getSrc()).into(ivHuuihua);
+            tvzhibo.setText(String.valueOf(partitionsBean.getPartition().getCount()));
+
+            adapter = new HuihuaAdapter(mContext,partitions);
+            gvHuihuazhuanqu.setAdapter(adapter);
+
+            Log.e("TAG", "Huihua---------");
         }
     }
-
 
     class BannerViewHolder extends RecyclerView.ViewHolder {
 

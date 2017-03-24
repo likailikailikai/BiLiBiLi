@@ -1,10 +1,8 @@
 package com.atguigu.bilibili.activity;
 
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -12,7 +10,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -38,7 +35,6 @@ public class WebViewActivity extends AppCompatActivity {
     @InjectView(R.id.activity_web_view)
     LinearLayout activityWebView;
 
-    private Context mContext = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,16 +85,8 @@ public class WebViewActivity extends AppCompatActivity {
                 break;
             case R.id.ib_more:
                 //更多
-//                showPopupWindow(view);
                 break;
         }
     }
-
-//    private void showPopupWindow(View view) {
-//        // 一个自定义的布局，作为显示的内容
-//        View contentView = LayoutInflater.from(mContext).inflate(
-//                R.layout.pop_window, null);
-//
-//    }
 
 }
