@@ -1,11 +1,24 @@
 package com.atguigu.bilibili.modle.zhuifan.fragment;
 
-import android.graphics.Color;
-import android.view.Gravity;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.base.BaseFragment;
+import com.atguigu.bilibili.modle.zhuifan.adapter.ZhuifanAdapter;
+import com.atguigu.bilibili.modle.zhuifan.bean.ZhuifanBean;
+import com.atguigu.bilibili.utils.Constants;
+import com.atguigu.bilibili.view.CustomEmptyView;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import okhttp3.Call;
 
 
 /**
@@ -15,15 +28,20 @@ import com.atguigu.bilibili.base.BaseFragment;
  */
 
 public class ZhuiFanFragment extends BaseFragment {
-    private TextView textView;
+
+    @InjectView(R.id.recyclerview)
+    RecyclerView recyclerview;
+    @InjectView(R.id.empty_layout)
+    CustomEmptyView emptyLayout;
+    @InjectView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
+    private ZhuifanAdapter adapter;
 
     @Override
     public View initView() {
-        textView = new TextView(mContext);
-        textView.setTextSize(20);
-        textView.setGravity(Gravity.CENTER);
-        textView.setTextColor(Color.RED);
-        return textView;
+        View view = View.inflate(mContext, R.layout.fragment_zhui_fan, null);
+        ButterKnife.inject(this, view);
+        return view;
     }
 
     /**
@@ -33,7 +51,45 @@ public class ZhuiFanFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
-        textView.setText("直播");
+        getDataFromNet();
     }
 
+    private void getDataFromNet() {
+        OkHttpUtils
+                .get()
+                .url(Constants.ZHUIFAN)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.e("TAG","联网失败=="+e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("TAG","联网成功==");
+                        processData(response);
+                    }
+                });
+    }
+
+    private void processData(String response) {
+
+        ZhuifanBean zhuifanBean = JSON.parseObject(response,ZhuifanBean.class);
+        Log.e("TAG", "数据解析成功=="+zhuifanBean.getResult());
+
+        adapter = new ZhuifanAdapter(mContext, zhuifanBean.getResult());
+        recyclerview.setAdapter(adapter);
+
+        GridLayoutManager manager = new GridLayoutManager(mContext,1);
+        //设置布局管理器
+        recyclerview.setLayoutManager(manager);
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
 }
