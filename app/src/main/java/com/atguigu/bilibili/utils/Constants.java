@@ -16,4 +16,7 @@ public class Constants {
     public static final String BANNER_WEB ="http://live.bilibili.com/hd/valentinesDay2ndH5";
 
     public static final String HUATI ="http://api.bilibili.com/topic/getlist?appkey=1d8b6e7d45233436&build=501000&mobi_app=android&page=1&pageSize=20&platform=android&ts=1490015740000&sign=be68382cdc99c168ef87f2fa423dd280";
+
+    public static final String TUIJIAN ="http://app.bilibili.com/x/feed/index?appkey=1d8b6e7d45233436&build=501000&idx=1490013261&mobi_app=android&network=wifi&platform=android&pull=true&style=2&ts=1490015599000&sign=af4edc66aef7e443c98c28de2b660aa4";
+
 }

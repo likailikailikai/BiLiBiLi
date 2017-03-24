@@ -1,11 +1,17 @@
 package com.atguigu.bilibili.modle.dynamic.fragment;
 
-import android.graphics.Color;
-import android.view.Gravity;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
+import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.base.BaseFragment;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by 情v枫 on 2017/3/24.
@@ -14,15 +20,15 @@ import com.atguigu.bilibili.base.BaseFragment;
  */
 
 public class DynamicFragment extends BaseFragment {
-    private TextView textView;
+
+    @InjectView(R.id.btn_login)
+    Button btnLogin;
 
     @Override
     public View initView() {
-        textView = new TextView(mContext);
-        textView.setTextSize(20);
-        textView.setGravity(Gravity.CENTER);
-        textView.setTextColor(Color.RED);
-        return textView;
+        View view = View.inflate(mContext, R.layout.fragment_dynamic, null);
+        ButterKnife.inject(this, view);
+        return view;
     }
 
     /**
@@ -32,7 +38,15 @@ public class DynamicFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
-        textView.setText("直播");
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
+
+    @OnClick(R.id.btn_login)
+    public void onClick() {
+    }
 }
