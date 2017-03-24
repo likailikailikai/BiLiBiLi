@@ -4,7 +4,7 @@
     android:id="@+id/activity_interest"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.atguigu.bilibili.activity.InterestActivity">
+    tools:context=".modle.faxian.activity.InterestActivity">
 
     <TextView
         android:layout_width="match_parent"

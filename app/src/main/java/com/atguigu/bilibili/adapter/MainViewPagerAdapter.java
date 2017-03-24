@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.atguigu.bilibili.fragment.BaseFragment;
+import com.atguigu.bilibili.base.BaseFragment;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
     private final ArrayList<BaseFragment> fragments;
-    private String[] titles = new String[]{"直播", "推荐", "追番", "分区", "发现"};
+    private String[] titles = new String[]{"直播", "推荐", "追番", "分区","动态","发现"};
 
     public MainViewPagerAdapter(FragmentManager fm, ArrayList<BaseFragment> fragments) {
         super(fm);
