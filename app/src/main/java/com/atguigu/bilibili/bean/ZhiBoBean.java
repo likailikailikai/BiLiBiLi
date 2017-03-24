@@ -8,7 +8,7 @@ import java.util.List;
  * 作用：
  */
 
-public class BannersBean {
+public class ZhiBoBean {
 
     /**
      * code : 0

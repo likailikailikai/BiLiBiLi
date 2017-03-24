@@ -1,27 +1,33 @@
 package com.atguigu.bilibili.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.bean.BannersBean;
+import com.atguigu.bilibili.activity.WebViewActivity;
+import com.atguigu.bilibili.bean.ZhiBoBean;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 import com.youth.banner.transformer.BackgroundToForegroundTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 
 
 /**
@@ -38,24 +44,14 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
     private final Context mContext;
     private final LayoutInflater inflater;
-    private final BannersBean.DataBean data;
+    private final ZhiBoBean.DataBean data;
 
     /**
      * 当前类型
      */
     public int currentType = BANNER;
-    @InjectView(R.id.ll_anchor)
-    LinearLayout llAnchor;
-    @InjectView(R.id.ll_center)
-    LinearLayout llCenter;
-    @InjectView(R.id.ll_video)
-    LinearLayout llVideo;
-    @InjectView(R.id.ll_search)
-    LinearLayout llSearch;
-    @InjectView(R.id.ll_category)
-    LinearLayout llCategory;
 
-    public HomeAdapter(Context mContext, BannersBean.DataBean data) {
+    public HomeAdapter(Context mContext, ZhiBoBean.DataBean data) {
         this.mContext = mContext;
         this.data = data;
         inflater = LayoutInflater.from(mContext);
@@ -112,26 +108,6 @@ public class HomeAdapter extends RecyclerView.Adapter {
         }
     }
 
-    @OnClick({R.id.ll_anchor, R.id.ll_center, R.id.ll_video, R.id.ll_search, R.id.ll_category})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ll_anchor:
-                Toast.makeText(mContext, "关注", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.ll_center:
-                Toast.makeText(mContext, "中心", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.ll_video:
-                Toast.makeText(mContext, "视频", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.ll_search:
-                Toast.makeText(mContext, "搜索", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.ll_category:
-                Toast.makeText(mContext, "分类", Toast.LENGTH_SHORT).show();
-                break;
-        }
-    }
 
     class LinearlayoutViewHolder extends RecyclerView.ViewHolder {
 
@@ -157,17 +133,16 @@ public class HomeAdapter extends RecyclerView.Adapter {
         }
 
 
-        public void setData(List<BannersBean.DataBean.BannerBean> bean) {
+        public void setData(final List<ZhiBoBean.DataBean.BannerBean> bean) {
             //1、得到数据
             //2、设置Banner数据
             List<String> images = new ArrayList<>();
             for (int i = 0; i < bean.size(); i++) {
                 images.add(bean.get(i).getImg());
-                images.add(bean.get(i).getImg());
-                images.add(bean.get(i).getImg());
-                images.add(bean.get(i).getImg());
-                images.add(bean.get(i).getImg());
-                images.add(bean.get(i).getImg());
+//                images.add(bean.get(i).getImg());
+//                images.add(bean.get(i).getImg());
+//                images.add(bean.get(i).getImg());
+//                images.add(bean.get(i).getImg());
             }
             //简单使用
             banner.setImages(images)
@@ -180,7 +155,6 @@ public class HomeAdapter extends RecyclerView.Adapter {
                                     .load(path)
                                     .crossFade()
                                     .into(imageView);
-                            Log.e("TAG", "图片加载");
                         }
                     })
                     .start();
@@ -188,6 +162,15 @@ public class HomeAdapter extends RecyclerView.Adapter {
             //设置样式
             banner.setBannerAnimation(BackgroundToForegroundTransformer.class);
             //3、设置banner的点击事件
+            banner.setOnBannerListener(new OnBannerListener() {
+                @Override
+                public void OnBannerClick(int position) {
+//                    Toast.makeText(mContext, "position=="+position, Toast.LENGTH_SHORT).show();
+                    ZhiBoBean.DataBean.BannerBean bannerBean = bean.get(position);
+                    Intent intent = new Intent(mContext, WebViewActivity.class);
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 }

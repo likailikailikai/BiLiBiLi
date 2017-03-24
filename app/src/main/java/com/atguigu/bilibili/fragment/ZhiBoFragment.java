@@ -8,7 +8,7 @@ import android.view.View;
 import com.alibaba.fastjson.JSON;
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.adapter.HomeAdapter;
-import com.atguigu.bilibili.bean.BannersBean;
+import com.atguigu.bilibili.bean.ZhiBoBean;
 import com.atguigu.bilibili.utils.Constants;
 import com.atguigu.bilibili.view.CustomEmptyView;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -74,7 +74,7 @@ public class ZhiBoFragment extends BaseFragment {
 
     private void processData(String response) {
         //使用fastjson解析json数据
-        BannersBean homeBean = JSON.parseObject(response,BannersBean.class);
+        ZhiBoBean homeBean = JSON.parseObject(response,ZhiBoBean.class);
         Log.e("TAG", "解析数据成功=="+homeBean.getData().getBanner().get(0).getImg());
 
         //设置RecycleView的适配器

@@ -1,9 +1,19 @@
 package com.atguigu.bilibili.fragment;
 
-import android.graphics.Color;
-import android.view.Gravity;
+import android.app.ListActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.atguigu.bilibili.R;
+import com.atguigu.bilibili.activity.TypeActivity;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by 情v枫 on 2017/3/21.
@@ -12,15 +22,15 @@ import android.widget.TextView;
  */
 
 public class TuiJianFragment extends BaseFragment {
-    private TextView textView;
+
+    @InjectView(R.id.iv_tuijian_biaoqian)
+    ImageView ivTuijianBiaoqian;
 
     @Override
     public View initView() {
-        textView = new TextView(mContext);
-        textView.setTextSize(20);
-        textView.setGravity(Gravity.CENTER);
-        textView.setTextColor(Color.RED);
-        return textView;
+        View view = View.inflate(mContext, R.layout.fragment_tui_jian, null);
+        ButterKnife.inject(this, view);
+        return view;
     }
 
     /**
@@ -30,6 +40,29 @@ public class TuiJianFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
-        textView.setText("推荐");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.inject(this, rootView);
+        return rootView;
+    }
+
+    @OnClick(R.id.iv_tuijian_biaoqian)
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.iv_tuijian_biaoqian:
+                Intent intent = new Intent(mContext, TypeActivity.class);
+                mContext.startActivity(intent);
+                break;
+        }
     }
 }

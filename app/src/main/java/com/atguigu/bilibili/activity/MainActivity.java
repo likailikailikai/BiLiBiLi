@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "首页", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ll_huiyuan:
-                Toast.makeText(MainActivity.this, "进入游戏中心", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "我的大会员", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ll_jifen:
                 Toast.makeText(MainActivity.this, "会员积分", Toast.LENGTH_SHORT).show();
