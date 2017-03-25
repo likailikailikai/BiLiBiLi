@@ -31,11 +31,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/ib_main_lift"
                         android:layout_width="30dp"
                         android:layout_height="35dp"
-                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="0dp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_navigation_drawer" />
@@ -57,26 +57,29 @@
                         android:text="未登录"
                         android:textColor="#ffff" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/ib_main_game"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
                         android:src="@drawable/ic_menu_top_game_center" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/ib_main_down"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
                         android:src="@drawable/ic_toolbar_menu_download" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/ib_main_search"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_download_search" />
+                        android:src="@drawable/ic_download_search"
+                        android:layout_marginRight="5dp"/>
 
                 </LinearLayout>
             </android.support.v7.widget.Toolbar>

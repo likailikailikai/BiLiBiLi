@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,17 +37,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     @InjectView(R.id.ib_main_lift)
-    ImageButton ibMainLift;
+    ImageView ibMainLift;
     @InjectView(R.id.toolbar_user_avatar)
     CircleImageView toolbarUserAvatar;
     @InjectView(R.id.tv_main)
     TextView tvMain;
     @InjectView(R.id.ib_main_game)
-    ImageButton ibMainGame;
+    ImageView ibMainGame;
     @InjectView(R.id.ib_main_down)
-    ImageButton ibMainDown;
+    ImageView ibMainDown;
     @InjectView(R.id.ib_main_search)
-    ImageButton ibMainSearch;
+    ImageView ibMainSearch;
     @InjectView(R.id.toolBar)
     Toolbar toolBar;
     @InjectView(R.id.tabLayout)
@@ -59,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
     CoordinatorLayout coordinatorlayout;
     @InjectView(R.id.toolbar_user_left)
     CircleImageView toolbarUserLeft;
+    @InjectView(R.id.ib_main_yueliang)
+    ImageButton ibMainYueliang;
     @InjectView(R.id.shang)
     RelativeLayout shang;
     @InjectView(R.id.ll_home)
@@ -69,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout llJifen;
     @InjectView(R.id.ll_huancun)
     LinearLayout llHuancun;
+    @InjectView(R.id.view)
+    View view;
     @InjectView(R.id.ll_shaohou)
     LinearLayout llShaohou;
     @InjectView(R.id.ll_shoucang)
@@ -79,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout llGuanzhu;
     @InjectView(R.id.ll_qianbao)
     LinearLayout llQianbao;
+    @InjectView(R.id.view2)
+    View view2;
     @InjectView(R.id.ll_zhuti)
     LinearLayout llZhuti;
     @InjectView(R.id.ll_shezhi)
@@ -128,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.ib_main_lift, R.id.toolbar_user_avatar, R.id.tv_main, R.id.ib_main_game, R.id.ib_main_down, R.id.ib_main_search, R.id.toolbar_user_left, R.id.ll_home, R.id.ll_huiyuan, R.id.ll_jifen, R.id.ll_huancun, R.id.ll_shaohou, R.id.ll_shoucang, R.id.ll_lishi, R.id.ll_guanzhu, R.id.ll_qianbao, R.id.ll_zhuti, R.id.ll_shezhi,R.id.ib_main_yueliang})
+    @OnClick({R.id.ib_main_lift, R.id.toolbar_user_avatar, R.id.tv_main, R.id.ib_main_game, R.id.ib_main_down, R.id.ib_main_search, R.id.toolbar_user_left, R.id.ll_home, R.id.ll_huiyuan, R.id.ll_jifen, R.id.ll_huancun, R.id.ll_shaohou, R.id.ll_shoucang, R.id.ll_lishi, R.id.ll_guanzhu, R.id.ll_qianbao, R.id.ll_zhuti, R.id.ll_shezhi, R.id.ib_main_yueliang})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ib_main_lift:
@@ -209,11 +216,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (isFirst) {
-                    if (Math.abs(eventX - startX) > Math.abs(eventY - startY) && Math.abs(eventX - startX) > toolBar.getHeight()*0.30) {
+                    if (Math.abs(eventX - startX) > Math.abs(eventY - startY) && Math.abs(eventX - startX) > toolBar.getHeight() * 0.30) {
                         isScrollY = false;
                         isFirst = false;
                         appbar.setExpanded(isOpen);
-                    } else if (Math.abs(eventY - startY) > Math.abs(eventX - startX) && Math.abs(eventY - startY) > toolBar.getHeight()*0.30) {
+                    } else if (Math.abs(eventY - startY) > Math.abs(eventX - startX) && Math.abs(eventY - startY) > toolBar.getHeight() * 0.30) {
                         isScrollY = true;
                         isFirst = false;
                     }

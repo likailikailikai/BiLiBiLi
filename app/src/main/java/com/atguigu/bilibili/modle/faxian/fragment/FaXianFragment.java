@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.modle.faxian.activity.InterestActivity;
+import com.atguigu.bilibili.modle.faxian.activity.OriginalRankActivity;
 import com.atguigu.bilibili.modle.faxian.activity.TopicActivity;
 import com.atguigu.bilibili.modle.faxian.bean.FaXianBean;
 import com.atguigu.bilibili.base.BaseFragment;
@@ -186,7 +187,9 @@ public class FaXianFragment extends BaseFragment {
                 Toast.makeText(mContext, "小黑屋", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ll_yuanchuang:
-                Toast.makeText(mContext, "原创排行榜", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "原创排行榜", Toast.LENGTH_SHORT).show();
+                Intent inetnt4 = new Intent(mContext,OriginalRankActivity.class);
+                mContext.startActivity(inetnt4);
                 break;
             case R.id.ll_quanqu:
                 Toast.makeText(mContext, "全区排行榜", Toast.LENGTH_SHORT).show();

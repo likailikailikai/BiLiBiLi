@@ -21,4 +21,6 @@ public class Constants {
 
     public static final String ZHUIFAN ="http://bangumi.bilibili.com/api/app_index_page_v4?build=3940&device=phone&mobi_app=iphone&platform=ios";
 
+    public static final String DONGHUAQU ="http://app.bilibili.com/x/v2/show/region?appkey=1d8b6e7d45233436&build=501000&mobi_app=android&platform=android&ts=1490237034000&sign=88d791158ed34cc95694741d6b02f9de";
+
 }
