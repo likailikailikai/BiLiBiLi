@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_fanju_tab"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/iv_fanju"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="7dp"
+            android:src="@drawable/bangumi_follow_ic_recommend" />
+
+        <TextView
+            android:id="@+id/tv_fanjubiaoti"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_fanju"
+            android:gravity="center"
+            android:text="番剧推荐"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/tvfanju1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:drawableRight="@drawable/ic_gray_arrow_right"
+            android:gravity="center"
+            android:text="更多番剧 " />
+
+    </RelativeLayout>
+
+</LinearLayout>
