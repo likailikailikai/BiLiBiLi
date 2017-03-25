@@ -6,13 +6,13 @@
     android:orientation="vertical">
 
 
-    <com.atguigu.bilibili.view.MyGridView
+    <GridView
         android:id="@+id/tuijian_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:numColumns="2">
 
-    </com.atguigu.bilibili.view.MyGridView>
+    </GridView>
 
 
 </LinearLayout>

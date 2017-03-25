@@ -1,10 +1,12 @@
 package com.atguigu.bilibili.modle.tuijian.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.bilibili.R;
@@ -30,7 +32,7 @@ import okhttp3.Call;
 public class ComprehensiveFragment extends BaseFragment {
 
     @InjectView(R.id.tuijian_grid)
-    MyGridView tuijianGrid;
+    GridView tuijianGrid;
 
     private TuijianAdapter adapter;
 
@@ -78,6 +80,7 @@ public class ComprehensiveFragment extends BaseFragment {
         //设置RecycleView的适配器
         adapter = new TuijianAdapter(mContext, tuijianBean.getData());
         tuijianGrid.setAdapter(adapter);
+
     }
 
     @Override
