@@ -59,27 +59,27 @@
 
                     <ImageView
                         android:id="@+id/ib_main_game"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
                         android:layout_gravity="center"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="20dp"
                         android:src="@drawable/ic_menu_top_game_center" />
 
                     <ImageView
                         android:id="@+id/ib_main_down"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
                         android:layout_gravity="center"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="20dp"
                         android:src="@drawable/ic_toolbar_menu_download" />
 
                     <ImageView
                         android:id="@+id/ib_main_search"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_download_search"
-                        android:layout_marginRight="5dp"/>
+                        android:layout_marginRight="10dp"/>
 
                 </LinearLayout>
             </android.support.v7.widget.Toolbar>

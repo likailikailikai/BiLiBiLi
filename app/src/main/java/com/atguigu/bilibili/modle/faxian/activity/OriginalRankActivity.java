@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,7 +15,6 @@ import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.base.BaseFragment;
 import com.atguigu.bilibili.modle.faxian.adapter.YuanchuangphbViewPagerAdapter;
 import com.atguigu.bilibili.modle.faxian.fragment.FanjuFragment;
-import com.atguigu.bilibili.modle.faxian.fragment.QuanzhanFragment;
 import com.atguigu.bilibili.modle.faxian.fragment.YuanchuangFragment;
 
 import java.util.ArrayList;
@@ -42,6 +42,7 @@ public class OriginalRankActivity extends AppCompatActivity {
     @InjectView(R.id.view_pager)
     ViewPager viewPager;
 
+    private boolean isOpen = true;
     private YuanchuangphbViewPagerAdapter adapter;
     private ArrayList<BaseFragment> fragments;
 
@@ -66,7 +67,7 @@ public class OriginalRankActivity extends AppCompatActivity {
     private void initFragment() {
         fragments = new ArrayList<>();
         fragments.add(new YuanchuangFragment());
-        fragments.add(new QuanzhanFragment());
+        fragments.add(new YuanchuangFragment());
         fragments.add(new FanjuFragment());
     }
 
@@ -74,11 +75,74 @@ public class OriginalRankActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ib_main_lift:
+                finish();
                 break;
             case R.id.ib_main_down:
                 break;
             case R.id.ib_main_search:
                 break;
         }
+    }
+
+    private int startY;
+    private int startX;
+    private boolean isScrollY;
+    private boolean isFirst;
+
+    //tollBar 回弹效果
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        int eventY = (int) ev.getY();
+        int eventX = (int) ev.getX();
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                startY = eventY;
+                startX = eventX;
+                isFirst = true;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (isFirst) {
+                    if (Math.abs(eventX - startX) > Math.abs(eventY - startY) && Math.abs(eventX - startX) > toolBar.getHeight() * 0.30) {
+                        isScrollY = false;
+                        isFirst = false;
+                        appbar.setExpanded(isOpen);
+                    } else if (Math.abs(eventY - startY) > Math.abs(eventX - startX) && Math.abs(eventY - startY) > toolBar.getHeight() * 0.30) {
+                        isScrollY = true;
+                        isFirst = false;
+                    }
+                }
+                if (isOpen) {
+                    if (startY < eventY) {
+                        startY = eventY;
+                    }
+                } else {
+                    if (startY > eventY) {
+                        startY = eventY;
+                    }
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                if (isScrollY) {
+                    if (isOpen) {
+                        if (startY - eventY > toolBar.getHeight() * 0.36) {
+                            appbar.setExpanded(false);
+                            isOpen = false;
+                        } else {
+                            appbar.setExpanded(true);
+                            isOpen = true;
+                        }
+                    } else {
+                        if (eventY - startY > toolBar.getHeight() * 0.36) {
+                            appbar.setExpanded(true);
+                            isOpen = true;
+                        } else {
+                            appbar.setExpanded(false);
+                            isOpen = false;
+                        }
+                    }
+                }
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
     }
 }
