@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#e6e6e6"
-    tools:context="com.atguigu.bilibili.MainActivity">
+    tools:context="com.atguigu.bilibili.activity.MainActivity">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/coordinatorlayout"

@@ -46,17 +46,17 @@
 
                 <ImageView
                     android:id="@+id/ib_main_down"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="20dp"
                     android:layout_centerInParent="true"
                     android:layout_toLeftOf="@+id/ib_main_search"
                     android:src="@drawable/ic_toolbar_menu_download" />
 
                 <ImageView
                     android:id="@+id/ib_main_search"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_marginRight="10dp"
                     android:layout_centerInParent="true"
                     android:layout_alignParentRight="true"

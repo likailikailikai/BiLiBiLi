@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atguigu.bilibili.R;
+import com.atguigu.bilibili.activity.MainActivity;
 import com.atguigu.bilibili.modle.faxian.activity.InterestActivity;
 import com.atguigu.bilibili.modle.faxian.activity.OriginalRankActivity;
 import com.atguigu.bilibili.modle.faxian.activity.TopicActivity;
@@ -15,6 +16,8 @@ import com.atguigu.bilibili.modle.faxian.bean.FaXianBean;
 import com.atguigu.bilibili.base.BaseFragment;
 import com.atguigu.bilibili.utils.Constants;
 import com.google.gson.Gson;
+import com.wyt.searchbox.SearchFragment;
+import com.wyt.searchbox.custom.IOnSearchClickListener;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -38,8 +41,6 @@ import butterknife.OnClick;
  */
 
 public class FaXianFragment extends BaseFragment {
-
-
 
 
     @InjectView(R.id.tv_main_faxian)
@@ -115,7 +116,8 @@ public class FaXianFragment extends BaseFragment {
     }
 
     /**
-     *使用Gson解析JSON
+     * 使用Gson解析JSON
+     *
      * @param json
      */
     //适配器代码
@@ -130,18 +132,15 @@ public class FaXianFragment extends BaseFragment {
 
         }
 
-        flowlayout.setAdapter(new TagAdapter<String>(mVals)
-        {
+        flowlayout.setAdapter(new TagAdapter<String>(mVals) {
             @Override
-            public View getView(FlowLayout parent, int position, String s)
-            {
+            public View getView(FlowLayout parent, int position, String s) {
                 TextView tv = (TextView) mInflater.inflate(R.layout.tv,
                         flowlayout, false);
                 tv.setText(s);
                 return tv;
             }
         });
-
 
 
     }
@@ -163,24 +162,33 @@ public class FaXianFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_main_faxian:
-                Toast.makeText(mContext, "搜索", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "搜索", Toast.LENGTH_SHORT).show();
+                SearchFragment searchFragment = SearchFragment.newInstance();
+                searchFragment.setOnSearchClickListener(new IOnSearchClickListener() {
+                    @Override
+                    public void OnSearchClick(String keyword) {
+                        //这里处理逻辑
+                        Toast.makeText(mContext, keyword, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                searchFragment.show(getChildFragmentManager(), SearchFragment.TAG);
                 break;
             case R.id.flowlayout:
                 Toast.makeText(mContext, "都在搜", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ll_xingqu:
 //                Toast.makeText(mContext, "兴趣", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(mContext,InterestActivity.class);
+                Intent intent = new Intent(mContext, InterestActivity.class);
                 mContext.startActivity(intent);
                 break;
             case R.id.ll_huati:
 //                Toast.makeText(mContext, "话题", Toast.LENGTH_SHORT).show();
-                Intent intent1 = new Intent(mContext,TopicActivity.class);
+                Intent intent1 = new Intent(mContext, TopicActivity.class);
                 mContext.startActivity(intent1);
                 break;
             case R.id.ll_huodong:
 //                Toast.makeText(mContext, "活动", Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent(mContext,TopicActivity.class);
+                Intent intent2 = new Intent(mContext, TopicActivity.class);
                 mContext.startActivity(intent2);
                 break;
             case R.id.ll_xiaoheiwu:
@@ -188,7 +196,7 @@ public class FaXianFragment extends BaseFragment {
                 break;
             case R.id.ll_yuanchuang:
 //                Toast.makeText(mContext, "原创排行榜", Toast.LENGTH_SHORT).show();
-                Intent inetnt4 = new Intent(mContext,OriginalRankActivity.class);
+                Intent inetnt4 = new Intent(mContext, OriginalRankActivity.class);
                 mContext.startActivity(inetnt4);
                 break;
             case R.id.ll_quanqu:
@@ -202,6 +210,7 @@ public class FaXianFragment extends BaseFragment {
                 break;
         }
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

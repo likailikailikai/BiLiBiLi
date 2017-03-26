@@ -10,12 +10,16 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.atguigu.bilibili.R;
+import com.atguigu.bilibili.activity.MainActivity;
 import com.atguigu.bilibili.base.BaseFragment;
 import com.atguigu.bilibili.modle.faxian.adapter.YuanchuangphbViewPagerAdapter;
 import com.atguigu.bilibili.modle.faxian.fragment.FanjuFragment;
 import com.atguigu.bilibili.modle.faxian.fragment.YuanchuangFragment;
+import com.wyt.searchbox.SearchFragment;
+import com.wyt.searchbox.custom.IOnSearchClickListener;
 
 import java.util.ArrayList;
 
@@ -80,6 +84,15 @@ public class OriginalRankActivity extends AppCompatActivity {
             case R.id.ib_main_down:
                 break;
             case R.id.ib_main_search:
+                SearchFragment searchFragment = SearchFragment.newInstance();
+                searchFragment.setOnSearchClickListener(new IOnSearchClickListener() {
+                    @Override
+                    public void OnSearchClick(String keyword) {
+                        //这里处理逻辑
+                        Toast.makeText(OriginalRankActivity.this, keyword, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                searchFragment.show(getSupportFragmentManager(), SearchFragment.TAG);
                 break;
         }
     }

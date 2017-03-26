@@ -1,5 +1,6 @@
-package com.atguigu.bilibili;
+package com.atguigu.bilibili.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -17,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.adapter.MainViewPagerAdapter;
 import com.atguigu.bilibili.base.BaseFragment;
 import com.atguigu.bilibili.modle.dynamic.fragment.DynamicFragment;
@@ -26,6 +28,8 @@ import com.atguigu.bilibili.modle.tuijian.fragment.TuiJianFragment;
 import com.atguigu.bilibili.modle.zhibo.fragment.ZhiBoFragment;
 import com.atguigu.bilibili.modle.zhuifan.fragment.ZhuiFanFragment;
 import com.atguigu.bilibili.view.CircleImageView;
+import com.wyt.searchbox.SearchFragment;
+import com.wyt.searchbox.custom.IOnSearchClickListener;
 
 import java.util.ArrayList;
 
@@ -154,7 +158,16 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "进入管理缓存", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ib_main_search:
-                Toast.makeText(MainActivity.this, "搜索", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(MainActivity.this, "搜索", Toast.LENGTH_SHORT).show();
+                SearchFragment searchFragment = SearchFragment.newInstance();
+                searchFragment.setOnSearchClickListener(new IOnSearchClickListener() {
+                    @Override
+                    public void OnSearchClick(String keyword) {
+                        //这里处理逻辑
+                        Toast.makeText(MainActivity.this, keyword, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                searchFragment.show(getSupportFragmentManager(), SearchFragment.TAG);
                 break;
             case R.id.toolbar_user_left:
                 Toast.makeText(MainActivity.this, "登录", Toast.LENGTH_SHORT).show();
@@ -193,7 +206,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "主题", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ll_shezhi:
-                Toast.makeText(MainActivity.this, "设置", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "设置", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
                 break;
         }
     }

@@ -1,4 +1,4 @@
-package com.atguigu.bilibili;
+package com.atguigu.bilibili.activity;
 
 import android.app.Application;
 import android.content.Context;

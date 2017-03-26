@@ -1,10 +1,12 @@
-package com.atguigu.bilibili;
+package com.atguigu.bilibili.activity;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
+
+import com.atguigu.bilibili.R;
 
 public class WelcomeActivity extends AppCompatActivity {
 
