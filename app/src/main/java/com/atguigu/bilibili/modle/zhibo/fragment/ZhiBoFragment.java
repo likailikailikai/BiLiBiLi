@@ -1,5 +1,6 @@
 package com.atguigu.bilibili.modle.zhibo.fragment;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -35,6 +36,8 @@ public class ZhiBoFragment extends BaseFragment {
     CustomEmptyView emptylayout;
 
     private ZhiBoAdapter adapter;
+    @InjectView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public View initView() {
@@ -50,8 +53,20 @@ public class ZhiBoFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
+        initSwipeRefreshLayout();
         getDataFromNet();
 
+    }
+
+    private void initSwipeRefreshLayout() {
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        mSwipeRefreshLayout.setRefreshing(true);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh() {
+                getDataFromNet();
+            }
+        });
     }
 
     private void getDataFromNet() {
@@ -62,12 +77,12 @@ public class ZhiBoFragment extends BaseFragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Log.e("TAG","联网失败=="+e.getMessage());
+                        Log.e("TAG", "联网失败==" + e.getMessage());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("TAG","联网成功==");
+                        Log.e("TAG", "联网成功==");
                         processData(response);
                     }
                 });
@@ -75,17 +90,27 @@ public class ZhiBoFragment extends BaseFragment {
 
     private void processData(String response) {
         //使用fastjson解析json数据
-        ZhiBoBean homeBean = JSON.parseObject(response,ZhiBoBean.class);
-        Log.e("TAG", "解析数据成功=="+homeBean.getData().getBanner().get(0).getImg());
+        ZhiBoBean homeBean = JSON.parseObject(response, ZhiBoBean.class);
+
+        if(mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
+        Log.e("TAG", "解析数据成功==" + homeBean.getData().getBanner().get(0).getImg());
 
         //设置RecycleView的适配器
-        adapter = new ZhiBoAdapter(mContext,homeBean.getData());
+        adapter = new ZhiBoAdapter(mContext, homeBean.getData());
         recyclerview.setAdapter(adapter);
 
-       GridLayoutManager manager = new GridLayoutManager(mContext,1);
+        GridLayoutManager manager = new GridLayoutManager(mContext, 1);
         //设置布局管理器
         recyclerview.setLayoutManager(manager);
     }
+
+
+
+
+
+
 
     @Override
     public void onDestroyView() {

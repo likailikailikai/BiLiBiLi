@@ -1,6 +1,7 @@
 package com.atguigu.bilibili.modle.tuijian.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.modle.tuijian.bean.TuijianBean;
+import com.atguigu.bilibili.playvideo.DanmkuVideoActivity;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -27,6 +29,10 @@ import butterknife.InjectView;
 public class TuijianAdapter extends BaseAdapter {
     private final Context mContext;
     private final List<TuijianBean.DataBean> datas;
+
+    public static final String VIDEO = "video";
+    public static final String TNAME = "Tname";
+
 
     public TuijianAdapter(Context mContext, List<TuijianBean.DataBean> data) {
         this.mContext = mContext;
@@ -65,6 +71,19 @@ public class TuijianAdapter extends BaseAdapter {
         viewHolder.itemLiveTitle.setText(dataBean.getTitle());
         viewHolder.itemliveplay.setText(dataBean.getParam());
         viewHolder.itemLiveFenlei.setText(dataBean.getName());
+
+        final String uri = dataBean.getUri();
+        final String tname = dataBean.getTname();
+        viewHolder.itemLiveLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, DanmkuVideoActivity.class);
+                intent.putExtra(VIDEO,uri);
+                intent.putExtra(TNAME,tname);
+                mContext.startActivity(intent);
+            }
+        });
+
         return convertView;
     }
 

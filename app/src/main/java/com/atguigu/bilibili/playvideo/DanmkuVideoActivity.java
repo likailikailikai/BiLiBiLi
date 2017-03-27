@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.modle.faxian.adapter.HuatiAdapter;
+import com.atguigu.bilibili.modle.tuijian.adapter.TuijianAdapter;
 import com.atguigu.bilibili.modle.zhibo.adapter.HuihuaAdapter;
 import com.atguigu.bilibili.utils.Constants;
 import com.shuyu.gsyvideoplayer.GSYPreViewManager;
@@ -37,6 +38,7 @@ public class DanmkuVideoActivity extends AppCompatActivity {
     private boolean isPause;
 
     private OrientationUtils orientationUtils;
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +52,11 @@ public class DanmkuVideoActivity extends AppCompatActivity {
 
 //        String url = "http://baobab.wdjcdn.com/14564977406580.mp4";
         //String url = "https://res.exexm.com/cw_145225549855002";
-        String url = getIntent().getStringExtra(HuihuaAdapter.VIDEO);
-        danmakuPlayer.setUp(url, true, null, "测试视频");
+        url = getIntent().getStringExtra(HuihuaAdapter.VIDEO);
+        url = getIntent().getStringExtra(TuijianAdapter.VIDEO);
+
+
+        danmakuPlayer.setUp(url, true, null, "你来试试");
 
         //增加封面
         ImageView imageView = new ImageView(this);

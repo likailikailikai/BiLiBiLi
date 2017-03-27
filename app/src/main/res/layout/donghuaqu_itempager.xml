@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#e6e6e6"
     android:orientation="vertical">
 
-    <include layout="@layout/donghuaqu_tab"/>
+    <include layout="@layout/donghuaqu_tab" />
 
     <com.atguigu.bilibili.view.MyGridView
         android:id="@+id/gv_donghuaqu"
@@ -15,6 +16,16 @@
 
     </com.atguigu.bilibili.view.MyGridView>
 
-    <include layout="@layout/donghuaqu_bottom"/>
+    <include layout="@layout/donghuaqu_bottom" />
+
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_gravity="center_horizontal"
+        app:image_scale_type="fit_xy"
+        app:indicator_height="5dp"
+        app:indicator_width="5dp"
+        app:is_auto_play="true" />
 
 </LinearLayout>

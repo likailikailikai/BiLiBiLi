@@ -1,6 +1,7 @@
 package com.atguigu.bilibili.modle.tuijian.fragment;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +37,9 @@ public class ComprehensiveFragment extends BaseFragment {
 
     private TuijianAdapter adapter;
 
+    @InjectView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+
     @Override
     public View initView() {
         View view = View.inflate(mContext, R.layout.fragment_comprehensive, null);
@@ -50,8 +54,19 @@ public class ComprehensiveFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
-
+        initSwipeRefreshLayout();
         getDataFromNet();
+    }
+
+    private void initSwipeRefreshLayout() {
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        mSwipeRefreshLayout.setRefreshing(true);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh() {
+                getDataFromNet();
+            }
+        });
     }
 
     private void getDataFromNet() {
@@ -75,11 +90,17 @@ public class ComprehensiveFragment extends BaseFragment {
 
     private void processData(String response) {
         TuijianBean tuijianBean = JSON.parseObject(response, TuijianBean.class);
+
+        if(mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
+
         Log.e("TAG", "数据解析成功==" + tuijianBean.getData());
 
         //设置RecycleView的适配器
         adapter = new TuijianAdapter(mContext, tuijianBean.getData());
         tuijianGrid.setAdapter(adapter);
+
 
     }
 

@@ -51,7 +51,19 @@ public class ZhuiFanFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
+        initSwipeRefreshLayout();
         getDataFromNet();
+    }
+
+    private void initSwipeRefreshLayout() {
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefreshLayout.setRefreshing(true);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh() {
+                getDataFromNet();
+            }
+        });
     }
 
     private void getDataFromNet() {
@@ -76,6 +88,11 @@ public class ZhuiFanFragment extends BaseFragment {
     private void processData(String response) {
 
         ZhuifanBean zhuifanBean = JSON.parseObject(response,ZhuifanBean.class);
+
+        if(swipeRefreshLayout != null) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
+
         Log.e("TAG", "数据解析成功=="+zhuifanBean.getResult());
 
         adapter = new ZhuifanAdapter(mContext, zhuifanBean.getResult());
