@@ -3,6 +3,8 @@ package com.atguigu.bilibili.activity;
 import android.app.Application;
 import android.content.Context;
 
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
+
 import org.xutils.x;
 
 import cn.sharesdk.framework.ShareSDK;
@@ -28,5 +30,8 @@ public class MyApplication extends Application {
 
         //初始化ShareSDK
         ShareSDK.initSDK(this);
+
+        //二维码扫描初始化
+        ZXingLibrary.initDisplayOpinion(this);
     }
 }

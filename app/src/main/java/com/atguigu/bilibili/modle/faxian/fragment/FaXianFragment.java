@@ -1,21 +1,26 @@
 package com.atguigu.bilibili.modle.faxian.fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.activity.MainActivity;
+import com.atguigu.bilibili.base.BaseFragment;
 import com.atguigu.bilibili.modle.faxian.activity.InterestActivity;
 import com.atguigu.bilibili.modle.faxian.activity.OriginalRankActivity;
 import com.atguigu.bilibili.modle.faxian.activity.TopicActivity;
 import com.atguigu.bilibili.modle.faxian.bean.FaXianBean;
-import com.atguigu.bilibili.base.BaseFragment;
 import com.atguigu.bilibili.utils.Constants;
 import com.google.gson.Gson;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.wyt.searchbox.SearchFragment;
 import com.wyt.searchbox.custom.IOnSearchClickListener;
 import com.zhy.view.flowlayout.FlowLayout;
@@ -43,8 +48,12 @@ import butterknife.OnClick;
 public class FaXianFragment extends BaseFragment {
 
 
+    @InjectView(R.id.ic_hint_search)
+    ImageView icHintSearch;
+    @InjectView(R.id.ic_scan_erweima)
+    ImageView icScanerweima;
     @InjectView(R.id.tv_main_faxian)
-    TextView tvMainFaxian;
+    RelativeLayout tvMainFaxian;
     @InjectView(R.id.flowlayout)
     TagFlowLayout flowlayout;
     @InjectView(R.id.ll_xingqu)
@@ -65,6 +74,10 @@ public class FaXianFragment extends BaseFragment {
     LinearLayout llZhoubianShop;
     private LayoutInflater mInflater;
 
+    /**
+     * 扫描跳转Activity RequestCode
+     */
+    public static final int REQUEST_CODE = 111;
 
     @Override
     public View initView() {
@@ -158,7 +171,9 @@ public class FaXianFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.tv_main_faxian, R.id.flowlayout, R.id.ll_xingqu, R.id.ll_huati, R.id.ll_huodong, R.id.ll_xiaoheiwu, R.id.ll_yuanchuang, R.id.ll_quanqu, R.id.ll_youxizhongxin, R.id.ll_zhoubian_shop})
+    @OnClick({R.id.tv_main_faxian, R.id.flowlayout, R.id.ll_xingqu, R.id.ll_huati, R.id.ic_scan_erweima,
+            R.id.ll_huodong, R.id.ll_xiaoheiwu, R.id.ll_yuanchuang, R.id.ll_quanqu,
+            R.id.ll_youxizhongxin, R.id.ll_zhoubian_shop})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_main_faxian:
@@ -172,6 +187,10 @@ public class FaXianFragment extends BaseFragment {
                     }
                 });
                 searchFragment.show(getChildFragmentManager(), SearchFragment.TAG);
+                break;
+            case R.id.ic_scan_erweima:
+                Intent intent0 = new Intent(mContext, CaptureActivity.class);
+                startActivityForResult(intent0, REQUEST_CODE);
                 break;
             case R.id.flowlayout:
                 Toast.makeText(mContext, "都在搜", Toast.LENGTH_SHORT).show();
@@ -212,8 +231,34 @@ public class FaXianFragment extends BaseFragment {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        /**
+         * 处理二维码扫描结果
+         */
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    Toast.makeText(mContext, "解析结果:" + result, Toast.LENGTH_LONG).show();
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    Toast.makeText(mContext, "解析二维码失败", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
     }
+
 }
