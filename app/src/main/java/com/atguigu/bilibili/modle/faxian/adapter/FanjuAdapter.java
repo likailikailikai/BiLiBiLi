@@ -1,6 +1,7 @@
 package com.atguigu.bilibili.modle.faxian.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -58,7 +59,13 @@ public class FanjuAdapter extends BaseAdapter {
         }
 
         final FanjuBean.DataBean dataBean = datas.get(position);
+        viewHolder.tvShu.setText(position+1+"");
 
+        if(position <3) {
+            viewHolder.tvShu.setTextColor(Color.parseColor("#fb7299"));
+        }else{
+            viewHolder.tvShu.setTextColor(Color.parseColor("#cdcdcd"));
+        }
         Glide.with(mContext).load(dataBean.getCover()).into(viewHolder.imageview);
         viewHolder.tvZhuti.setText(dataBean.getTitle());
         viewHolder.upZhu.setText(dataBean.getName());
