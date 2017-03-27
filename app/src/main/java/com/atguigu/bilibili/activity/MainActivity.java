@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -32,6 +33,8 @@ import com.wyt.searchbox.SearchFragment;
 import com.wyt.searchbox.custom.IOnSearchClickListener;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -274,4 +277,44 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.dispatchTouchEvent(ev);
     }
+
+
+    //点两次退出
+    private boolean isDouble = false;
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (isDouble) {
+                //退出
+                finish();
+            }
+            Toast.makeText(this, "再点击一次退出应用", Toast.LENGTH_SHORT).show();
+            isDouble = true;
+            //超两秒改为isDouble
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    isDouble = false;
+                }
+            }, 2000);
+
+//            CountDownTimer timer = new CountDownTimer(10000,1000) {
+//                //第一个参数是总时间，，第二个参数是间隔时间
+//                @Override
+//                public void onTick(long millisUntilFinished) {
+//                    //每倒计时一次调用一次
+//                }
+//
+//                @Override
+//                public void onFinish() {
+//                    //执行完成后调用
+//                }
+//            }.start();
+
+            return true;
+
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
 }
