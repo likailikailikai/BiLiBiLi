@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/more_fenxiang"
+        android:orderInCategory="100"
+        android:title="@string/more_fenxiang" />
+    <item
+        android:id="@+id/more_liulanqi"
+        android:orderInCategory="100"
+        android:title="@string/more_liulanqi" />
+    <item
+        android:id="@+id/more_lianjie"
+        android:orderInCategory="100"
+        android:title="@string/more_lianjie" />
+</menu>

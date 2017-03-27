@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">哔哩哔哩</string>
     <string name="you_may_search">大家都在搜</string>
+    <string name="more_fenxiang">分享</string>
+    <string name="more_liulanqi">浏览器打开</string>
+    <string name="more_lianjie">复制连接</string>
     <string name="detail_text">1、一句情话可以和多少人分享。你的情绪可以被多少人牵引。我的存在感为百分之几点几。多愁善感的我又算什么。
 
 　　2、当一个男人喜新厌旧的时候，任是一点轻微的理由都是他离开你的借口。

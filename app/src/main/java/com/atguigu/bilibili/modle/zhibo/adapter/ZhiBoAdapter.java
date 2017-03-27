@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.modle.zhibo.activity.BannerWebViewActivity;
 import com.atguigu.bilibili.modle.zhibo.bean.ZhiBoBean;
+import com.atguigu.bilibili.utils.Constants;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
@@ -214,6 +215,8 @@ public class ZhiBoAdapter extends RecyclerView.Adapter {
 //                    Toast.makeText(mContext, "position=="+position, Toast.LENGTH_SHORT).show();
                     ZhiBoBean.DataBean.BannerBean bannerBean = bean.get(position);
                     Intent intent = new Intent(mContext, BannerWebViewActivity.class);
+                    intent.putExtra(Constants.URL,bannerBean.getLink());
+                    intent.putExtra(Constants.TITLE,bannerBean.getTitle());
                     mContext.startActivity(intent);
                 }
             });

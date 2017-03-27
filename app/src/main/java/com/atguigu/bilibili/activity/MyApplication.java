@@ -5,6 +5,8 @@ import android.content.Context;
 
 import org.xutils.x;
 
+import cn.sharesdk.framework.ShareSDK;
+
 
 /**
  * Created by Baby on 2017/1/10.
@@ -22,6 +24,9 @@ public class MyApplication extends Application {
         x.Ext.setDebug(true); // 是否输出debug日志...
 
         // 获取全局上下文
-        mContext  = this;
+        mContext = this;
+
+        //初始化ShareSDK
+        ShareSDK.initSDK(this);
     }
 }
