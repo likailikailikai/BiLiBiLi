@@ -1,6 +1,7 @@
 package com.atguigu.bilibili.modle.fenqu.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,9 +17,12 @@ import android.widget.TextView;
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.modle.fenqu.bean.ChannelBean;
 import com.atguigu.bilibili.modle.fenqu.bean.DonghuaquBean;
+import com.atguigu.bilibili.modle.zhibo.activity.BannerWebViewActivity;
+import com.atguigu.bilibili.utils.Constants;
 import com.atguigu.bilibili.view.MyGridView;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 import com.youth.banner.transformer.BackgroundToForegroundTransformer;
 
@@ -136,7 +140,7 @@ public class FenQuAdapter extends RecyclerView.Adapter {
             ButterKnife.inject(this, itemView);
         }
 
-        public void setData(List<DonghuaquBean.DataBean> dhqBean, int position) {
+        public void setData(final List<DonghuaquBean.DataBean> dhqBean, int position) {
             final DonghuaquBean.DataBean dataBean = dhqBean.get(position - 1);
             List<DonghuaquBean.DataBean.BodyBean> body1 = dhqBean.get(0).getBody();
 //            Glide.with(mContext).load(body.get(0).getCover()).into(ivDonghua);
@@ -172,6 +176,17 @@ public class FenQuAdapter extends RecyclerView.Adapter {
             //设置样式
             banner.setBannerAnimation(BackgroundToForegroundTransformer.class);
             //3、设置banner的点击事件
+            banner.setOnBannerListener(new OnBannerListener() {
+                @Override
+                public void OnBannerClick(int position) {
+                    final DonghuaquBean.DataBean.BannerBean.BottomBean bottomBean = dataBean.getBanner().getBottom().get(position);
+
+                    Intent intent = new Intent(mContext, BannerWebViewActivity.class);
+                    intent.putExtra(Constants.URL,bottomBean.getUri());
+                    intent.putExtra(Constants.TITLE,bottomBean.getTitle());
+                    mContext.startActivity(intent);
+                }
+            });
 
         }
 
