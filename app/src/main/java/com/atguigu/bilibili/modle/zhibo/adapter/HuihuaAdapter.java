@@ -1,6 +1,7 @@
 package com.atguigu.bilibili.modle.zhibo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.modle.zhibo.bean.ZhiBoBean;
+import com.atguigu.bilibili.playvideo.DanmkuVideoActivity;
 import com.atguigu.bilibili.view.CircleImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -28,6 +30,8 @@ import butterknife.InjectView;
 public class HuihuaAdapter extends BaseAdapter {
     private final Context mContext;
     private final List<ZhiBoBean.DataBean.PartitionsBean> datas;
+    public static final String VIDEO = "video";
+    private static final String VT = "vt";
 
     public HuihuaAdapter(Context mContext, List<ZhiBoBean.DataBean.PartitionsBean> data) {
         this.mContext = mContext;
@@ -75,6 +79,19 @@ public class HuihuaAdapter extends BaseAdapter {
         viewHolder.itemLiveTitle.setText(lives.get(position).getTitle());
         viewHolder.itemLiveUser.setText(lives.get(position).getOwner().getName());
         viewHolder.itemLiveCount.setText(String.valueOf(lives.get(position).getOnline()));
+
+        final String playurl = lives.get(0).getPlayurl();
+        final String title = lives.get(0).getTitle();
+
+        viewHolder.itemLiveLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, DanmkuVideoActivity.class);
+                intent.putExtra(VIDEO,playurl);
+                intent.putExtra(VT,title);
+                mContext.startActivity(intent);
+            }
+        });
         return convertView;
     }
 

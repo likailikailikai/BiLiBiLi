@@ -3,6 +3,8 @@
     package="com.atguigu.bilibili">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 请求访问网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".activity.MyApplication"
@@ -25,6 +27,8 @@
         <activity android:name=".modle.faxian.activity.TopicActivity" />
         <activity android:name=".modle.faxian.activity.OriginalRankActivity" />
         <activity android:name=".activity.SettingsActivity"></activity>
+        <activity android:name=".playvideo.DanmkuVideoActivity"></activity>
+
     </application>
 
 </manifest>
