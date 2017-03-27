@@ -34,7 +34,7 @@ public class DonghuaAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return donghuaquBean.size();
+        return 4;
     }
 
     @Override

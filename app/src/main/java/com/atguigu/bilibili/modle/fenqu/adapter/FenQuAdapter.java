@@ -39,7 +39,7 @@ public class FenQuAdapter extends RecyclerView.Adapter {
 
     public static final int CHANNEL = 0;
     public static final int DONGHUA = 1;
-    public static final int BANNER = 2;
+    public static final int GUOCHUANG = 2;
 
     private final Context mContext;
     private final List<ChannelBean.DataBean> data1;
@@ -62,18 +62,11 @@ public class FenQuAdapter extends RecyclerView.Adapter {
         inflater = LayoutInflater.from(mContext);
     }
 
-//    public void setData(){
-//
-//    }
-
-////    public void setData2(){
-//
-//    }
 
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 2;
     }
 
     @Override
@@ -82,8 +75,8 @@ public class FenQuAdapter extends RecyclerView.Adapter {
             currentType = position;
         } else if (position == DONGHUA) {
             currentType = DONGHUA;
-        } else if (position == BANNER) {
-            currentType = BANNER;
+//        } else if (position == BANNER) {
+//            currentType = BANNER;
         }
         return currentType;
     }
@@ -94,8 +87,8 @@ public class FenQuAdapter extends RecyclerView.Adapter {
             return new ChannelViewHolder(mContext, inflater.inflate(R.layout.channel_item, null));
         } else if (viewType == DONGHUA) {
             return new DonghuaViewHolder(mContext, inflater.inflate(R.layout.donghuaqu_itempager, null));
-        } else if (viewType == BANNER) {
-            return new BannerViewHolder(mContext, inflater.inflate(R.layout.fenqu_banner_itempager, null));
+//        } else if (viewType == BANNER) {
+//            return new BannerViewHolder(mContext, inflater.inflate(R.layout.fenqu_banner_itempager, null));
         }
         return null;
     }
@@ -109,50 +102,11 @@ public class FenQuAdapter extends RecyclerView.Adapter {
         } else if (position == DONGHUA) {
             DonghuaViewHolder viewholder = (DonghuaViewHolder) holder;
             viewholder.setData(dhqBean, position);
-        } else if (position == BANNER) {
-            BannerViewHolder viewHolder = (BannerViewHolder) holder;
-            viewHolder.setData(dhqBean.get(0).getBanner());
+//        } else if (position == GUOCHUANG) {
+//            GuochaungViewHolder viewHolder = (GuochaungViewHolder) holder;
+//            viewHolder.setData(dhqBean.get(1));
         }
     }
-
-    class BannerViewHolder extends RecyclerView.ViewHolder {
-        private final Context mContext;
-        @InjectView(R.id.banner)
-        Banner banner;
-        public BannerViewHolder(Context mContext, View itemView) {
-            super(itemView);
-            this.mContext = mContext;
-            ButterKnife.inject(this,itemView);
-            banner = (Banner) itemView.findViewById(R.id.banner);
-        }
-
-        public void setData(DonghuaquBean.DataBean.BannerBean bannerBean) {
-            //获取banner数据
-            List<String> images = new ArrayList<>();
-            for (int i = 0; i < bannerBean.getBottom().size(); i++) {
-                images.add(bannerBean.getBottom().get(0).getImage());
-            }
-            banner.setImages(images)
-                    .setImageLoader(new ImageLoader() {
-                        @Override
-                        public void displayImage(Context context, Object path, ImageView imageView) {
-                            //具体方法内容自己去选择，次方法是为了减少banner过多的依赖第三方包，所以将这个权限开放给使用者去选择
-                            Glide
-                                    .with(context)
-                                    .load(path)
-                                    .crossFade()
-                                    .into(imageView);
-                        }
-                    })
-                    .start();
-            Log.e("TAG", "开始banner");
-            //设置样式
-            banner.setBannerAnimation(BackgroundToForegroundTransformer.class);
-            //3、设置banner的点击事件
-
-        }
-    }
-
 
     class DonghuaViewHolder extends RecyclerView.ViewHolder {
         @InjectView(R.id.iv_donghua)
@@ -169,6 +123,8 @@ public class FenQuAdapter extends RecyclerView.Adapter {
         Button btnDonghuaBottom;
         @InjectView(R.id.iv_donghua_shuaxin)
         TextView ivDonghuaShuaxin;
+        @InjectView(R.id.banner)
+        Banner banner;
 
         private final Context mContext;
 
@@ -188,6 +144,35 @@ public class FenQuAdapter extends RecyclerView.Adapter {
 
             donghuaAdapter = new DonghuaAdapter(mContext, dhqBean);
             gvDonghuaqu.setAdapter(donghuaAdapter);
+
+            //获取banner数据
+            List<String> images = new ArrayList<>();
+//            for (int i = 0; i < bannerBean.getBottom().size(); i++) {
+//                images.add(bannerBean.getBottom().get(i).getImage());
+//            }
+
+            for (int i = 0; i < dataBean.getBanner().getBottom().size(); i++) {
+                images.add(dataBean.getBanner().getBottom().get(i).getImage());
+            }
+
+            banner.setImages(images)
+                    .setImageLoader(new ImageLoader() {
+                        @Override
+                        public void displayImage(Context context, Object path, ImageView imageView) {
+                            //具体方法内容自己去选择，次方法是为了减少banner过多的依赖第三方包，所以将这个权限开放给使用者去选择
+                            Glide
+                                    .with(context)
+                                    .load(path)
+                                    .crossFade()
+                                    .into(imageView);
+                        }
+                    })
+                    .start();
+            Log.e("TAG", "开始banner");
+            //设置样式
+            banner.setBannerAnimation(BackgroundToForegroundTransformer.class);
+            //3、设置banner的点击事件
+
         }
 
 //        public void setData(List<DonghuaquBean.DataBean.BodyBean> body) {
