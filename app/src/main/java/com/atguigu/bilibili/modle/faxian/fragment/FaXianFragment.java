@@ -18,6 +18,11 @@ import com.atguigu.bilibili.modle.faxian.activity.OriginalRankActivity;
 import com.atguigu.bilibili.modle.faxian.activity.TopicActivity;
 import com.atguigu.bilibili.modle.faxian.bean.FaXianBean;
 import com.atguigu.bilibili.utils.Constants;
+import com.github.hymanme.tagflowlayout.OnTagClickListener;
+import com.github.hymanme.tagflowlayout.TagFlowLayout;
+import com.github.hymanme.tagflowlayout.bean.TagBean;
+import com.github.hymanme.tagflowlayout.tags.ColorfulTagView;
+import com.github.hymanme.tagflowlayout.tags.DefaultTagView;
 import com.google.gson.Gson;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
@@ -25,13 +30,13 @@ import com.wyt.searchbox.SearchFragment;
 import com.wyt.searchbox.custom.IOnSearchClickListener;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
-import com.zhy.view.flowlayout.TagFlowLayout;
 
 import org.xutils.common.Callback;
 import org.xutils.common.util.LogUtil;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -54,8 +59,7 @@ public class FaXianFragment extends BaseFragment {
     ImageView icScanerweima;
     @InjectView(R.id.tv_main_faxian)
     RelativeLayout tvMainFaxian;
-    @InjectView(R.id.flowlayout)
-    TagFlowLayout flowlayout;
+
     @InjectView(R.id.ll_xingqu)
     LinearLayout llXingqu;
     @InjectView(R.id.ll_huati)
@@ -72,7 +76,10 @@ public class FaXianFragment extends BaseFragment {
     LinearLayout llYouxizhongxin;
     @InjectView(R.id.ll_zhoubian_shop)
     LinearLayout llZhoubianShop;
+    @InjectView(R.id.tag_flow_layout)
+    TagFlowLayout tagFlowLayout;
     private LayoutInflater mInflater;
+
 
     /**
      * 扫描跳转Activity RequestCode
@@ -85,6 +92,7 @@ public class FaXianFragment extends BaseFragment {
         ButterKnife.inject(this, view);
         return view;
     }
+
 
     /**
      * 1.把数据绑定到控件上的时候，重新该方法
@@ -139,24 +147,56 @@ public class FaXianFragment extends BaseFragment {
         FaXianBean faXianBean = paraseJson(json);
         List<FaXianBean.DataBean.ListBean> list = faXianBean.getData().getList();
 
-        String[] mVals = new String[list.size()];
+        final String[] mVals = new String[list.size()];
         for (int i = 0; i < mVals.length; i++) {
             mVals[i] = list.get(i).getKeyword();
 
         }
+//
+//        flowlayout.setAdapter(new TagAdapter<String>(mVals) {
+//            @Override
+//            public View getView(FlowLayout parent, int position, String s) {
+//                TextView tv = (TextView) mInflater.inflate(R.layout.tv,
+//                        flowlayout, false);
+//                tv.setText(s);
+//                return tv;
+//            }
+//        });
 
-        flowlayout.setAdapter(new TagAdapter<String>(mVals) {
+        List<TagBean> tagBeen = new ArrayList<>();
+        for (int i = 0; i < 50; i++) {
+            tagBeen.add(new TagBean(i, "tags+" + i));
+        }
+
+        tagFlowLayout.setTagListener(new OnTagClickListener() {
             @Override
-            public View getView(FlowLayout parent, int position, String s) {
-                TextView tv = (TextView) mInflater.inflate(R.layout.tv,
-                        flowlayout, false);
-                tv.setText(s);
-                return tv;
+            public void onClick(TagFlowLayout parent, View view, int position) {
+                Toast.makeText(mContext, "click==" + ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onLongClick(TagFlowLayout parent, View view, int position) {
+                Toast.makeText(mContext, "long click==" + ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+
             }
         });
-
+        MyTagAdapter tagAdapter = new MyTagAdapter();
+        tagAdapter.addAllTags(tagBeen);
+        tagFlowLayout.setTagAdapter(tagAdapter);
 
     }
+
+    class MyTagAdapter extends com.github.hymanme.tagflowlayout.TagAdapter<TagBean> {
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            DefaultTagView textView = new ColorfulTagView(mContext);
+            textView.setText(((TagBean) getItem(position)).getName());
+            return textView;
+        }
+    }
+
 
     /**
      * json解析数据
@@ -171,7 +211,7 @@ public class FaXianFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.tv_main_faxian, R.id.flowlayout, R.id.ll_xingqu, R.id.ll_huati, R.id.ic_scan_erweima,
+    @OnClick({R.id.tv_main_faxian,  R.id.ll_xingqu, R.id.ll_huati, R.id.ic_scan_erweima,
             R.id.ll_huodong, R.id.ll_xiaoheiwu, R.id.ll_yuanchuang, R.id.ll_quanqu,
             R.id.ll_youxizhongxin, R.id.ll_zhoubian_shop})
     public void onClick(View view) {
@@ -192,9 +232,9 @@ public class FaXianFragment extends BaseFragment {
                 Intent intent0 = new Intent(mContext, CaptureActivity.class);
                 startActivityForResult(intent0, REQUEST_CODE);
                 break;
-            case R.id.flowlayout:
-                Toast.makeText(mContext, "都在搜", Toast.LENGTH_SHORT).show();
-                break;
+//            case R.id.flowlayout:
+//                Toast.makeText(mContext, "都在搜", Toast.LENGTH_SHORT).show();
+//                break;
             case R.id.ll_xingqu:
 //                Toast.makeText(mContext, "兴趣", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, InterestActivity.class);
@@ -261,4 +301,11 @@ public class FaXianFragment extends BaseFragment {
         ButterKnife.reset(this);
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.inject(this, rootView);
+        return rootView;
+    }
 }

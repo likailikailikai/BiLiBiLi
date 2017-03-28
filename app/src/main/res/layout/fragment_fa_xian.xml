@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:zhy="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -33,8 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="16dp"
-            android:drawablePadding="5dp"
             android:background="#ffff"
+            android:drawablePadding="5dp"
             android:padding="7dp">
 
 
@@ -76,30 +77,17 @@
         </RelativeLayout>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:text="大家都在搜"
-            android:textColor="#9c9c9c"
-            android:textSize="14sp" />
-
-        <android.support.v4.widget.NestedScrollView
+        <com.github.hymanme.tagflowlayout.TagFlowLayout
+            android:id="@+id/tag_flow_layout"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginBottom="25dp">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="8dp"
+            app:expandHint="查看更多"
+            app:foldHint="点击缩回"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <com.zhy.view.flowlayout.TagFlowLayout
-                android:id="@+id/flowlayout"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                zhy:max_select="-1">
-
-            </com.zhy.view.flowlayout.TagFlowLayout>
-        </android.support.v4.widget.NestedScrollView>
-
+        </com.github.hymanme.tagflowlayout.TagFlowLayout>
 
         <LinearLayout
             android:id="@+id/ll_xingqu"
