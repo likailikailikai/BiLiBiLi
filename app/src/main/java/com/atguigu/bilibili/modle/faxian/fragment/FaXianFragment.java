@@ -17,6 +17,7 @@ import com.atguigu.bilibili.modle.faxian.activity.InterestActivity;
 import com.atguigu.bilibili.modle.faxian.activity.OriginalRankActivity;
 import com.atguigu.bilibili.modle.faxian.activity.TopicActivity;
 import com.atguigu.bilibili.modle.faxian.bean.FaXianBean;
+import com.atguigu.bilibili.modle.faxian.bean.FanjuBean;
 import com.atguigu.bilibili.utils.Constants;
 import com.github.hymanme.tagflowlayout.OnTagClickListener;
 import com.github.hymanme.tagflowlayout.TagFlowLayout;
@@ -85,6 +86,7 @@ public class FaXianFragment extends BaseFragment {
      * 扫描跳转Activity RequestCode
      */
     public static final int REQUEST_CODE = 111;
+    private List<FaXianBean.DataBean.ListBean> list;
 
     @Override
     public View initView() {
@@ -145,28 +147,14 @@ public class FaXianFragment extends BaseFragment {
     private void processData(String json) {
         mInflater = LayoutInflater.from(mContext);
         FaXianBean faXianBean = paraseJson(json);
-        List<FaXianBean.DataBean.ListBean> list = faXianBean.getData().getList();
+        list = faXianBean.getData().getList();
 
         final String[] mVals = new String[list.size()];
         for (int i = 0; i < mVals.length; i++) {
             mVals[i] = list.get(i).getKeyword();
 
         }
-//
-//        flowlayout.setAdapter(new TagAdapter<String>(mVals) {
-//            @Override
-//            public View getView(FlowLayout parent, int position, String s) {
-//                TextView tv = (TextView) mInflater.inflate(R.layout.tv,
-//                        flowlayout, false);
-//                tv.setText(s);
-//                return tv;
-//            }
-//        });
 
-        List<TagBean> tagBeen = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            tagBeen.add(new TagBean(i, "tags+" + i));
-        }
 
         tagFlowLayout.setTagListener(new OnTagClickListener() {
             @Override
@@ -182,17 +170,17 @@ public class FaXianFragment extends BaseFragment {
             }
         });
         MyTagAdapter tagAdapter = new MyTagAdapter();
-        tagAdapter.addAllTags(tagBeen);
+        tagAdapter.addAllTags(list);
         tagFlowLayout.setTagAdapter(tagAdapter);
 
     }
 
-    class MyTagAdapter extends com.github.hymanme.tagflowlayout.TagAdapter<TagBean> {
+    class MyTagAdapter extends com.github.hymanme.tagflowlayout.TagAdapter<FaXianBean.DataBean.ListBean> {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             DefaultTagView textView = new ColorfulTagView(mContext);
-            textView.setText(((TagBean) getItem(position)).getName());
+            textView.setText(list.get(position).getKeyword());
             return textView;
         }
     }
