@@ -7,6 +7,7 @@ import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import org.xutils.x;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.sharesdk.framework.ShareSDK;
 
 
@@ -33,5 +34,10 @@ public class MyApplication extends Application {
 
         //二维码扫描初始化
         ZXingLibrary.initDisplayOpinion(this);
+
+        //极光推送
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
+
 }
