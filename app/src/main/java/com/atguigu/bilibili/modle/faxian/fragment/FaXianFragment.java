@@ -14,14 +14,15 @@ import android.widget.Toast;
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.base.BaseFragment;
 import com.atguigu.bilibili.modle.faxian.activity.InterestActivity;
+import com.atguigu.bilibili.modle.faxian.activity.MallActivity;
+import com.atguigu.bilibili.modle.faxian.activity.MallWebViewActivity;
 import com.atguigu.bilibili.modle.faxian.activity.OriginalRankActivity;
 import com.atguigu.bilibili.modle.faxian.activity.TopicActivity;
 import com.atguigu.bilibili.modle.faxian.bean.FaXianBean;
-import com.atguigu.bilibili.modle.faxian.bean.FanjuBean;
+import com.atguigu.bilibili.modle.zhibo.activity.BannerWebViewActivity;
 import com.atguigu.bilibili.utils.Constants;
 import com.github.hymanme.tagflowlayout.OnTagClickListener;
 import com.github.hymanme.tagflowlayout.TagFlowLayout;
-import com.github.hymanme.tagflowlayout.bean.TagBean;
 import com.github.hymanme.tagflowlayout.tags.ColorfulTagView;
 import com.github.hymanme.tagflowlayout.tags.DefaultTagView;
 import com.google.gson.Gson;
@@ -29,15 +30,12 @@ import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.wyt.searchbox.SearchFragment;
 import com.wyt.searchbox.custom.IOnSearchClickListener;
-import com.zhy.view.flowlayout.FlowLayout;
-import com.zhy.view.flowlayout.TagAdapter;
 
 import org.xutils.common.Callback;
 import org.xutils.common.util.LogUtil;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -248,12 +246,17 @@ public class FaXianFragment extends BaseFragment {
                 break;
             case R.id.ll_quanqu:
                 Toast.makeText(mContext, "全区排行榜", Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(mContext,DistrictActivity.class));
                 break;
             case R.id.ll_youxizhongxin:
-                Toast.makeText(mContext, "游戏中心", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "游戏中心", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(mContext,MallActivity.class));
                 break;
             case R.id.ll_zhoubian_shop:
-                Toast.makeText(mContext, "周边商城", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "周边商城", Toast.LENGTH_SHORT).show();
+
+                Intent intent5 = new Intent(mContext,MallWebViewActivity.class);
+                mContext.startActivity(intent5);
                 break;
         }
     }

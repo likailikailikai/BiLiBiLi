@@ -56,4 +56,6 @@ dependencies {
     compile files('libs/picasso-2.5.2.jar')
     compile 'cn.yipianfengye.android:zxing-library:2.1' //二维码库
     compile 'com.github.hymanme.tagflowlayout:tagflowlayout:0.2.2'
+    //greendao依赖
+    compile 'org.greenrobot:greendao:3.2.0'
 }

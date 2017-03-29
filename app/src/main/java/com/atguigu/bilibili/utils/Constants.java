@@ -32,4 +32,12 @@ public class Constants {
 
     public static final String FANJU ="http://app.bilibili.com/x/v2/rank?appkey=1d8b6e7d45233436&build=501000&mobi_app=android&order=bangumi&platform=android&pn=1&ps=20&ts=1490015891000&sign=c29299ef4b95c26e104efc13437cf628";
 
+    public static final String FROUNDMALL ="http://bmall.bilibili.com/";
+
+    public static final String MALLBANNER ="http://bmall.bilibili.com/apiSecond/public/getModelData.do?mark_code=7f7d1ac0796211e6ab5352223301d29a";
+
+    public static final String MALLGIRDVIEW = "http://bmall.bilibili.com/api/product/list.do?pn=1&ps=6";
+
+
+
 }
