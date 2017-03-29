@@ -59,39 +59,8 @@ public class FenQuFragment extends BaseFragment {
     public void initData() {
         super.initData();
 
-//        initRV();
         getDataFromNet();
-//        getDataFromNet2();
     }
-
-    private void getDataFromNet2() {
-        OkHttpUtils
-                .get()
-                .url(Constants.DONGHUAQU)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Log.e("TAG", "动画联网失败==" + e.getMessage());
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.e("TAG", "动画联网成功==");
-                        Log.e("TAG", "====" + response);
-                        processData2(response);
-                    }
-                });
-    }
-
-
-    private void processData2(String response) {
-        donghuaquBean = JSON.parseObject(response,DonghuaquBean.class);
-        Log.e("TAG", "liangwangbvjsdgnvkdshvkdfbvfdnvbfdn=="+donghuaquBean.getData());
-        donghuaData = donghuaquBean.getData();
-        initRV();
-    }
-
 
     private void getDataFromNet() {
         OkHttpUtils
@@ -123,6 +92,36 @@ public class FenQuFragment extends BaseFragment {
 //        //设置布局管理器
 //        recycle.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false));
     }
+
+
+    private void getDataFromNet2() {
+        OkHttpUtils
+                .get()
+                .url(Constants.DONGHUAQU)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.e("TAG", "动画联网失败==" + e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("TAG", "动画联网成功==");
+                        Log.e("TAG", "====" + response);
+                        processData2(response);
+                    }
+                });
+    }
+
+
+    private void processData2(String response) {
+        donghuaquBean = JSON.parseObject(response,DonghuaquBean.class);
+        Log.e("TAG", "liangwangbvjsdgnvkdshvkdfbvfdnvbfdn=="+donghuaquBean.getData());
+        donghuaData = donghuaquBean.getData();
+        initRV();
+    }
+
 
     private void initRV() {
         if(data != null && data.size() > 0 && donghuaData != null && donghuaData.size() > 0){

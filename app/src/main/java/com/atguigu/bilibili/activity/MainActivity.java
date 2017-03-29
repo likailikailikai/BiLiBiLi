@@ -173,7 +173,9 @@ public class MainActivity extends AppCompatActivity {
                 searchFragment.show(getSupportFragmentManager(), SearchFragment.TAG);
                 break;
             case R.id.toolbar_user_left:
-                Toast.makeText(MainActivity.this, "登录", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "登录", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.ib_main_yueliang:
                 Toast.makeText(MainActivity.this, "更换皮肤", Toast.LENGTH_SHORT).show();
