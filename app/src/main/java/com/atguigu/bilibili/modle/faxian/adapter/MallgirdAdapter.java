@@ -13,6 +13,8 @@ import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.modle.faxian.bean.MallgirdBean;
 import com.bumptech.glide.Glide;
 
+import java.util.List;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -24,11 +26,11 @@ import butterknife.InjectView;
 
 public class MallgirdAdapter extends BaseAdapter {
     private final Context mContext;
-    private final MallgirdBean.ResultBean.RecordsBean datas;
+    private final List<MallgirdBean.ResultBean.RecordsBean> datas;
 
-    public MallgirdAdapter(Context mContext, MallgirdBean.ResultBean.RecordsBean recordsBean) {
+    public MallgirdAdapter(Context mContext, List<MallgirdBean.ResultBean.RecordsBean> records) {
         this.mContext = mContext;
-        this.datas = recordsBean;
+        this.datas = records;
     }
 
 //    public MallgirdAdapter(Context mContext, MallgirdBean.ResultBean.RecordsBean recordsBean) {
@@ -38,7 +40,7 @@ public class MallgirdAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 7;
+        return datas.size();
     }
 
     @Override
@@ -62,11 +64,12 @@ public class MallgirdAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        MallgirdBean.ResultBean.RecordsBean recordsBean = datas.get(position);
 
-        Glide.with(mContext).load(this.datas.getImgUrl()).into(viewHolder.itemTupian);
+        Glide.with(mContext).load(recordsBean.getImgUrl()).into(viewHolder.itemTupian);
 
-        viewHolder.itemLiveTitle.setText(datas.getTitle());
-        viewHolder.itemPrice.setText(String.valueOf(datas.getSalvePrice()));
+        viewHolder.itemLiveTitle.setText(recordsBean.getTitle());
+        viewHolder.itemPrice.setText(String.valueOf(recordsBean.getSalvePrice()));
 
 //        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
 //            @Override

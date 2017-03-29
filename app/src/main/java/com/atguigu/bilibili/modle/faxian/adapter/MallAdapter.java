@@ -105,7 +105,7 @@ public class MallAdapter extends RecyclerView.Adapter {
         } else if (getItemViewType(position) == MALLGIRD) {
             MallGirdViewHolder viewHolder = (MallGirdViewHolder) holder;
             //绑定数据
-            viewHolder.setData(result2, position);
+            viewHolder.setData(result2.getRecords());
         }
     }
 
@@ -125,10 +125,9 @@ public class MallAdapter extends RecyclerView.Adapter {
             ButterKnife.inject(this, itemView);
         }
 
-        public void setData(final MallgirdBean.ResultBean result2, int position) {
-            final MallgirdBean.ResultBean.RecordsBean recordsBean = result2.getRecords().get(position);
+        public void setData(final List<MallgirdBean.ResultBean.RecordsBean> records) {
 
-            mallgirdAdapter = new MallgirdAdapter(mContext, recordsBean);
+            mallgirdAdapter = new MallgirdAdapter(mContext, records);
             gvMall.setAdapter(mallgirdAdapter);
 
 
