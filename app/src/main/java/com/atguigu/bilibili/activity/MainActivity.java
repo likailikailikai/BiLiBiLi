@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.adapter.MainViewPagerAdapter;
 import com.atguigu.bilibili.base.BaseFragment;
+import com.atguigu.bilibili.download.DownloadListActivity;
 import com.atguigu.bilibili.modle.dynamic.fragment.DynamicFragment;
 import com.atguigu.bilibili.modle.faxian.fragment.FaXianFragment;
 import com.atguigu.bilibili.modle.fenqu.fragment.FenQuFragment;
@@ -158,7 +159,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "进入游戏中心", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ib_main_down:
-                Toast.makeText(MainActivity.this, "进入管理缓存", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "进入管理缓存", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(MainActivity.this,DownloadListActivity.class);
+                startActivity(intent2);
                 break;
             case R.id.ib_main_search:
                 // Toast.makeText(MainActivity.this, "搜索", Toast.LENGTH_SHORT).show();
