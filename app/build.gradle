@@ -75,5 +75,5 @@ dependencies {
 
     compile 'cn.jiguang.sdk:jpush:3.0.3'  // 极光此处以JPush 3.0.3 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.1.1'  // 极光此处以JCore 1.1.1 版本为例。
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'//下载
 }

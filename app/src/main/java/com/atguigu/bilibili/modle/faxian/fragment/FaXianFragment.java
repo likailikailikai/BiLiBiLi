@@ -12,14 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.base.BaseFragment;
+import com.atguigu.bilibili.view.base.BaseFragment;
 import com.atguigu.bilibili.modle.faxian.activity.InterestActivity;
-import com.atguigu.bilibili.modle.faxian.activity.MallActivity;
-import com.atguigu.bilibili.modle.faxian.activity.MallWebViewActivity;
+import com.atguigu.bilibili.modle.faxian.mall.avtivity.MallActivity;
+import com.atguigu.bilibili.modle.faxian.mall.avtivity.MallWebViewActivity;
 import com.atguigu.bilibili.modle.faxian.activity.OriginalRankActivity;
 import com.atguigu.bilibili.modle.faxian.activity.TopicActivity;
 import com.atguigu.bilibili.modle.faxian.bean.FaXianBean;
-import com.atguigu.bilibili.modle.zhibo.activity.BannerWebViewActivity;
 import com.atguigu.bilibili.utils.Constants;
 import com.github.hymanme.tagflowlayout.OnTagClickListener;
 import com.github.hymanme.tagflowlayout.TagFlowLayout;

@@ -19,7 +19,7 @@ import com.atguigu.bilibili.modle.fenqu.bean.ChannelBean;
 import com.atguigu.bilibili.modle.fenqu.bean.DonghuaquBean;
 import com.atguigu.bilibili.modle.zhibo.activity.BannerWebViewActivity;
 import com.atguigu.bilibili.utils.Constants;
-import com.atguigu.bilibili.view.MyGridView;
+import com.atguigu.bilibili.view.view.MyGridView;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;

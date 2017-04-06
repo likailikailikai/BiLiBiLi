@@ -10,10 +10,10 @@ import com.alibaba.fastjson.JSON;
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.modle.fenqu.adapter.FenQuAdapter;
 import com.atguigu.bilibili.modle.fenqu.bean.ChannelBean;
-import com.atguigu.bilibili.base.BaseFragment;
+import com.atguigu.bilibili.view.base.BaseFragment;
 import com.atguigu.bilibili.modle.fenqu.bean.DonghuaquBean;
 import com.atguigu.bilibili.utils.Constants;
-import com.atguigu.bilibili.view.CustomEmptyView;
+import com.atguigu.bilibili.view.view.CustomEmptyView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 

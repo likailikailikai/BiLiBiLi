@@ -7,13 +7,13 @@
 
     <include layout="@layout/zhuifantuijian_tab"/>
 
-    <com.atguigu.bilibili.view.MyGridView
+    <com.atguigu.bilibili.view.view.MyGridView
         android:id="@+id/gv_zhuifantuijian"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:numColumns="3">
 
-    </com.atguigu.bilibili.view.MyGridView>
+    </com.atguigu.bilibili.view.view.MyGridView>
 
 
 </LinearLayout>

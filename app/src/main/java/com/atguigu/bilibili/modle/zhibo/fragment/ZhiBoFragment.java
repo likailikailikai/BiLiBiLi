@@ -10,9 +10,9 @@ import com.alibaba.fastjson.JSON;
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.modle.zhibo.adapter.ZhiBoAdapter;
 import com.atguigu.bilibili.modle.zhibo.bean.ZhiBoBean;
-import com.atguigu.bilibili.base.BaseFragment;
+import com.atguigu.bilibili.view.base.BaseFragment;
 import com.atguigu.bilibili.utils.Constants;
-import com.atguigu.bilibili.view.CustomEmptyView;
+import com.atguigu.bilibili.view.view.CustomEmptyView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 

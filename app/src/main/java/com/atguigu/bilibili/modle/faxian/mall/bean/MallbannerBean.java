@@ -1,4 +1,4 @@
-package com.atguigu.bilibili.modle.faxian.bean;
+package com.atguigu.bilibili.modle.faxian.mall.bean;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.atguigu.bilibili.base;
+package com.atguigu.bilibili.view.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -10,6 +10,10 @@ public class Constants {
 
     public static final String URL = "url";
     public static final String TITLE = "TITLE";
+    public static final String TUPIAN = "tupian";
+    public static final String NAME = "name";
+    public static final String PRICE = "price";
+
 
 
     public static String BASE_URL = "http://live.bilibili.com/AppNewIndex/common?_device=android&appkey=1d8b6e7d45233436&build=501000&mobi_app=android&platform=android&scale=hdpi&ts=1490013188000&sign=92541a11ed62841120e786e637b9db3b";

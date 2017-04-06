@@ -1,4 +1,4 @@
-package com.atguigu.bilibili.activity;
+package com.atguigu.bilibili.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

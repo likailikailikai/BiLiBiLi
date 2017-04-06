@@ -11,12 +11,11 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.download.BitmapUtils;
+import com.atguigu.bilibili.utils.BitmapUtils;
 
 
 /**
- * Created by 李金桐 on 2017/3/13.
- * QQ: 474297694
+ * Created by 李铠 on 2017/3/13.
  * 功能: 自定义进度条
  */
 

@@ -8,11 +8,11 @@ import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.base.BaseFragment;
+import com.atguigu.bilibili.view.base.BaseFragment;
 import com.atguigu.bilibili.modle.zhuifan.adapter.ZhuifanAdapter;
 import com.atguigu.bilibili.modle.zhuifan.bean.ZhuifanBean;
 import com.atguigu.bilibili.utils.Constants;
-import com.atguigu.bilibili.view.CustomEmptyView;
+import com.atguigu.bilibili.view.view.CustomEmptyView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 

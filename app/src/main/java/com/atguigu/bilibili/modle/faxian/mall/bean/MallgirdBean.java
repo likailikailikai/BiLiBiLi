@@ -1,4 +1,4 @@
-package com.atguigu.bilibili.modle.faxian.bean;
+package com.atguigu.bilibili.modle.faxian.mall.bean;
 
 import java.util.List;
 
@@ -184,5 +184,18 @@ public class MallgirdBean {
                 this.vipPlusPrice = vipPlusPrice;
             }
         }
+    }
+
+    /**
+     * 是否选中
+     */
+    private boolean isChecked =true;
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

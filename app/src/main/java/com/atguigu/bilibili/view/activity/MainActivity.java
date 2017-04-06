@@ -1,4 +1,4 @@
-package com.atguigu.bilibili.activity;
+package com.atguigu.bilibili.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.adapter.MainViewPagerAdapter;
-import com.atguigu.bilibili.base.BaseFragment;
+import com.atguigu.bilibili.view.base.BaseFragment;
 import com.atguigu.bilibili.download.DownloadListActivity;
 import com.atguigu.bilibili.modle.dynamic.fragment.DynamicFragment;
 import com.atguigu.bilibili.modle.faxian.fragment.FaXianFragment;
@@ -29,7 +29,7 @@ import com.atguigu.bilibili.modle.fenqu.fragment.FenQuFragment;
 import com.atguigu.bilibili.modle.tuijian.fragment.TuiJianFragment;
 import com.atguigu.bilibili.modle.zhibo.fragment.ZhiBoFragment;
 import com.atguigu.bilibili.modle.zhuifan.fragment.ZhuiFanFragment;
-import com.atguigu.bilibili.view.CircleImageView;
+import com.atguigu.bilibili.view.view.CircleImageView;
 import com.wyt.searchbox.SearchFragment;
 import com.wyt.searchbox.custom.IOnSearchClickListener;
 

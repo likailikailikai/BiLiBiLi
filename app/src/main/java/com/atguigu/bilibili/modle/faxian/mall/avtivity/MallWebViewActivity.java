@@ -1,4 +1,4 @@
-package com.atguigu.bilibili.modle.faxian.activity;
+package com.atguigu.bilibili.modle.faxian.mall.avtivity;
 
 import android.content.Intent;
 import android.os.Build;

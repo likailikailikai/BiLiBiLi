@@ -12,8 +12,7 @@ import okio.Okio;
 import okio.Source;
 
 /**
- * Created by 李金桐 on 2017/3/24.
- * QQ: 474297694
+ * Created by 李铠 on 2017/3/24.
  * 功能: xxxx
  */
 

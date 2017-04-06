@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#e6e6e6"
-    tools:context="com.atguigu.bilibili.activity.MainActivity">
+    tools:context=".view.activity.MainActivity">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/coordinatorlayout"
@@ -40,7 +40,7 @@
                         android:layout_gravity="center"
                         android:src="@drawable/ic_navigation_drawer" />
 
-                    <com.atguigu.bilibili.view.CircleImageView
+                    <com.atguigu.bilibili.view.view.CircleImageView
                         android:id="@+id/toolbar_user_avatar"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
@@ -115,7 +115,7 @@
             android:layout_height="110dp"
             android:background="#FF4081">
 
-            <com.atguigu.bilibili.view.CircleImageView
+            <com.atguigu.bilibili.view.view.CircleImageView
                 android:id="@+id/toolbar_user_left"
                 android:layout_width="50dp"
                 android:layout_height="50dp"

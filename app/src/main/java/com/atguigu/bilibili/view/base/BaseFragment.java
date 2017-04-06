@@ -1,4 +1,4 @@
-package com.atguigu.bilibili.base;
+package com.atguigu.bilibili.view.base;
 
 import android.content.Context;
 import android.os.Bundle;

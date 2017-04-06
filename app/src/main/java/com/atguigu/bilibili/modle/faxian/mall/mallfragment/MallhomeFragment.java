@@ -8,10 +8,10 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.base.BaseFragment;
-import com.atguigu.bilibili.modle.faxian.adapter.MallAdapter;
-import com.atguigu.bilibili.modle.faxian.bean.MallbannerBean;
-import com.atguigu.bilibili.modle.faxian.bean.MallgirdBean;
+import com.atguigu.bilibili.view.base.BaseFragment;
+import com.atguigu.bilibili.modle.faxian.mall.adapter.MallAdapter;
+import com.atguigu.bilibili.modle.faxian.mall.bean.MallbannerBean;
+import com.atguigu.bilibili.modle.faxian.mall.bean.MallgirdBean;
 import com.atguigu.bilibili.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;

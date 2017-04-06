@@ -1,27 +1,21 @@
 package com.atguigu.bilibili.modle.tuijian.fragment;
 
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.base.BaseFragment;
+import com.atguigu.bilibili.view.base.BaseFragment;
 import com.atguigu.bilibili.modle.tuijian.adapter.TuijianAdapter;
 import com.atguigu.bilibili.modle.tuijian.bean.TuijianBean;
 import com.atguigu.bilibili.utils.Constants;
-import com.atguigu.bilibili.view.MyGridView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 import okhttp3.Call;
 
 /**

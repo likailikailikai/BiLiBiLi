@@ -13,8 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.activity.MainActivity;
-import com.atguigu.bilibili.base.BaseFragment;
+import com.atguigu.bilibili.view.base.BaseFragment;
 import com.atguigu.bilibili.modle.faxian.adapter.YuanchuangphbViewPagerAdapter;
 import com.atguigu.bilibili.modle.faxian.fragment.FanjuFragment;
 import com.atguigu.bilibili.modle.faxian.fragment.YuanchuangFragment;

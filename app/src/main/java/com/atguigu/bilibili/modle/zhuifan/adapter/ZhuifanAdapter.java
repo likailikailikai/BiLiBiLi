@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.modle.zhuifan.bean.ZhuifanBean;
-import com.atguigu.bilibili.view.MyGridView;
+import com.atguigu.bilibili.view.view.MyGridView;
 
 import java.util.List;
 

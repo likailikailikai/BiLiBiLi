@@ -8,7 +8,7 @@ import android.widget.ListView;
 import com.alibaba.fastjson.JSON;
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.modle.faxian.adapter.HuatiAdapter;
-import com.atguigu.bilibili.base.BaseAcitivity;
+import com.atguigu.bilibili.view.base.BaseAcitivity;
 import com.atguigu.bilibili.modle.faxian.bean.HuatiBean;
 import com.atguigu.bilibili.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;

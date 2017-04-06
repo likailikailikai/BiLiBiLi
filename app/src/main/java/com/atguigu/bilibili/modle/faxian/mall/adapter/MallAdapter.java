@@ -1,4 +1,4 @@
-package com.atguigu.bilibili.modle.faxian.adapter;
+package com.atguigu.bilibili.modle.faxian.mall.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,9 +10,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.modle.faxian.bean.MallbannerBean;
-import com.atguigu.bilibili.modle.faxian.bean.MallgirdBean;
-import com.atguigu.bilibili.view.MyGridView;
+import com.atguigu.bilibili.modle.faxian.mall.bean.MallbannerBean;
+import com.atguigu.bilibili.modle.faxian.mall.bean.MallgirdBean;
+import com.atguigu.bilibili.view.view.MyGridView;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;

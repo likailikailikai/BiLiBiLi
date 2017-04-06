@@ -1,13 +1,10 @@
 package com.atguigu.bilibili.modle.dynamic.fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.base.BaseFragment;
+import com.atguigu.bilibili.view.base.BaseFragment;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

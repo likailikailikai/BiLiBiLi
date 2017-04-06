@@ -1,4 +1,4 @@
-package com.atguigu.bilibili.searchbox;
+package com.atguigu.bilibili.view.fragment;
 
 import android.content.DialogInterface;
 import android.os.Bundle;

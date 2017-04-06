@@ -1,4 +1,4 @@
-package com.atguigu.bilibili.modle.faxian.adapter;
+package com.atguigu.bilibili.modle.faxian.mall.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.modle.faxian.bean.MallgirdBean;
+import com.atguigu.bilibili.modle.faxian.mall.bean.MallgirdBean;
+import com.atguigu.bilibili.modle.faxian.mall.avtivity.GoodsInfoActivity;
+import com.atguigu.bilibili.utils.Constants;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -28,15 +30,12 @@ public class MallgirdAdapter extends BaseAdapter {
     private final Context mContext;
     private final List<MallgirdBean.ResultBean.RecordsBean> datas;
 
+
     public MallgirdAdapter(Context mContext, List<MallgirdBean.ResultBean.RecordsBean> records) {
         this.mContext = mContext;
         this.datas = records;
     }
 
-//    public MallgirdAdapter(Context mContext, MallgirdBean.ResultBean.RecordsBean recordsBean) {
-//        this.mContext = mContext;
-//        this.datas = recordsBean;
-//    }
 
     @Override
     public int getCount() {
@@ -64,22 +63,23 @@ public class MallgirdAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        MallgirdBean.ResultBean.RecordsBean recordsBean = datas.get(position);
+        final MallgirdBean.ResultBean.RecordsBean recordsBean = datas.get(position);
 
         Glide.with(mContext).load(recordsBean.getImgUrl()).into(viewHolder.itemTupian);
 
         viewHolder.itemLiveTitle.setText(recordsBean.getTitle());
         viewHolder.itemPrice.setText(String.valueOf(recordsBean.getSalvePrice()));
 
-//        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(mContext, GoodsInfoActivity.class);
-//                intent.putExtra(datas.getImgUrl(),"");
-//                intent.putExtra(datas.getTitle(),"");
-//                mContext.startActivity(intent);
-//            }
-//        });
+        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, GoodsInfoActivity.class);
+//                intent.putExtra(Constants.TUPIAN,recordsBean.getImgUrl());
+//                intent.putExtra(Constants.NAME,recordsBean.getTitle());
+//                intent.putExtra(Constants.PRICE,recordsBean.getSalvePrice());
+                mContext.startActivity(intent);
+            }
+        });
 
         return convertView;
     }

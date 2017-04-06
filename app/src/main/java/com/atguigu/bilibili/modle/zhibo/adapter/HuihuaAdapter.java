@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.modle.zhibo.bean.ZhiBoBean;
 import com.atguigu.bilibili.playvideo.DanmkuVideoActivity;
-import com.atguigu.bilibili.view.CircleImageView;
+import com.atguigu.bilibili.view.view.CircleImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 

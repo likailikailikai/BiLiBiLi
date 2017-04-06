@@ -1,15 +1,12 @@
 package com.atguigu.bilibili.modle.faxian.fragment;
 
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.base.BaseFragment;
+import com.atguigu.bilibili.view.base.BaseFragment;
 import com.atguigu.bilibili.modle.faxian.adapter.YuanchuangAdapter;
 import com.atguigu.bilibili.modle.faxian.bean.YuanchuangBean;
 import com.atguigu.bilibili.utils.Constants;

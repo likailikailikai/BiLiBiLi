@@ -8,13 +8,13 @@
 
     <include layout="@layout/donghuaqu_tab" />
 
-    <com.atguigu.bilibili.view.MyGridView
+    <com.atguigu.bilibili.view.view.MyGridView
         android:id="@+id/gv_donghuaqu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:numColumns="2">
 
-    </com.atguigu.bilibili.view.MyGridView>
+    </com.atguigu.bilibili.view.view.MyGridView>
 
     <include layout="@layout/donghuaqu_bottom" />
 

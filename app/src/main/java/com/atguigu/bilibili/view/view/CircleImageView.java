@@ -1,4 +1,4 @@
-package com.atguigu.bilibili.view;
+package com.atguigu.bilibili.view.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;

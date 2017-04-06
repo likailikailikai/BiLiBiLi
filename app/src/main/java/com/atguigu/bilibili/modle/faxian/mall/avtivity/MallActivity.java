@@ -1,4 +1,4 @@
-package com.atguigu.bilibili.modle.faxian.activity;
+package com.atguigu.bilibili.modle.faxian.mall.avtivity;
 
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;

@@ -1,4 +1,4 @@
-package com.atguigu.bilibili.activity;
+package com.atguigu.bilibili.view.activity;
 
 import android.content.Intent;
 import android.os.Handler;
