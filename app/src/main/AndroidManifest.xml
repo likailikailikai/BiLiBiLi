@@ -2,12 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.atguigu.bilibili">
 
+    <!-- 已适配Android6.0 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+
     <!-- Required -->
     <permission
         android:name="com.atguigu.bilibili.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
 
     <!-- Required -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="com.atguigu.bilibili.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -130,11 +142,10 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".modle.faxian.activity.DistrictActivity" />
         <activity android:name=".view.activity.LoginActivity" />
         <activity android:name=".modle.faxian.mall.avtivity.MallActivity" />
-        <activity android:name=".modle.faxian.mall.avtivity.GoodsInfoActivity"></activity>
-        <activity android:name=".download.DownloadListActivity"></activity>
+        <activity android:name=".modle.faxian.mall.avtivity.GoodsInfoActivity" />
+        <activity android:name=".download.DownloadListActivity" />
 
         <!-- alipay sdk begin -->
         <activity
@@ -145,6 +156,7 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <!-- alipay sdk end -->
 
+        <activity android:name=".modle.faxian.activity.MallWebViewActivity"></activity>
     </application>
 
 </manifest>
