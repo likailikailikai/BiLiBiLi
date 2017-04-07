@@ -1,4 +1,4 @@
-package com.atguigu.bilibili.modle.faxian.mall.view;
+package com.atguigu.bilibili.modle.faxian.mall.pay;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -13,28 +13,20 @@ import com.atguigu.bilibili.R;
 
 
 /**
- * 作者：李铠
- * 作用：xxxx
+ * Created by admin on 2017/3/28.
  */
+
 public class AddSubView extends LinearLayout {
 
     private ImageView iv_sub;
+    private  ImageView iv_add;
     private TextView tv_value;
-    private ImageView iv_add;
 
-    private int value = 1;
-    private int minValue = 1;
-    private int maxValue= 10;
+    private int minValue =1;
+    private  int value =1;
+    private  int maxvalue= 10;
 
-    public int getValue() {
-        return value;
-    }
 
-    public void setValue(int value) {
-        this.value = value;
-        tv_value.setText(value+"");//这样才可以
-
-    }
 
     public int getMinValue() {
         return minValue;
@@ -44,32 +36,39 @@ public class AddSubView extends LinearLayout {
         this.minValue = minValue;
     }
 
-    public int getMaxValue() {
-        return maxValue;
+    public int getValue() {
+        return value;
     }
 
-    public void setMaxValue(int maxValue) {
-        this.maxValue = maxValue;
+    public void setValue(int value) {
+        this.value = value;
+        tv_value.setText(value+"");
+    }
+
+    public int getMaxvalue() {
+        return maxvalue;
+    }
+
+    public void setMaxvalue(int maxvalue) {
+        this.maxvalue = maxvalue;
     }
 
     public AddSubView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        //把布局文件实例化成View,并且添加到AddSubView.this类中，成为他的子视图
-        View.inflate(context, R.layout.add_sub_view,AddSubView.this);
-        iv_sub = (ImageView) findViewById(R.id.iv_sub);
-        tv_value = (TextView) findViewById(R.id.tv_value);
-        iv_add = (ImageView) findViewById(R.id.iv_add);
 
-        //设置点击事件
+         View.inflate(context, R.layout.add_sub_view,AddSubView.this);
+         iv_sub = (ImageView)findViewById(R.id.iv_sub);
+         iv_add = (ImageView)findViewById(R.id.iv_add);
+         tv_value = (TextView)findViewById(R.id.tv_value);
+        //設置點擊事件
         iv_sub.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //不能小于最小值
-                if(value > minValue){
+                if(value>minValue) {
                     value --;
                 }
                 setValue(value);
-                if(listener != null){
+                if(listener !=null) {
                     listener.onNumberChanger(value);
                 }
             }
@@ -78,19 +77,15 @@ public class AddSubView extends LinearLayout {
         iv_add.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(value < maxValue){
+                if(value<maxvalue) {
                     value++;
                 }
-
                 setValue(value);
-
-                if(listener != null){
+                if(listener !=null) {
                     listener.onNumberChanger(value);
                 }
-
             }
         });
-
 
         if (attrs != null) {
             //取出属性
@@ -105,7 +100,7 @@ public class AddSubView extends LinearLayout {
             }
             int maxValue = tintTypedArray.getInt(R.styleable.AddSubView_maxValue, 0);
             if (value > 0) {
-                setMaxValue(maxValue);
+                setMaxvalue(maxValue);
             }
             Drawable addDrawable = tintTypedArray.getDrawable(R.styleable.AddSubView_numberAddBackground);
             if (addDrawable != null) {
@@ -119,20 +114,15 @@ public class AddSubView extends LinearLayout {
 
     }
 
-    /**
-     * 定义一个接口
-     */
-    public interface OnNumberChangerListener{
-        public void onNumberChanger(int value);
+
+    /*定義接口*/
+    public  interface  OnNumBerChangerListener{
+        public  void onNumberChanger(int value);
     }
 
-    private OnNumberChangerListener listener;
+    private OnNumBerChangerListener listener;
 
-    /**
-     * 设置数字改变的监听 - 在Activity或者适配器等中使用
-     * @param listener
-     */
-    public void setOnNumberChangerListener(OnNumberChangerListener listener) {
+    public void setListener(OnNumBerChangerListener listener) {
         this.listener = listener;
     }
 }

@@ -72,6 +72,10 @@ dependencies {
     compile 'com.github.hymanme.tagflowlayout:tagflowlayout:0.2.2'
     //greendao依赖
     compile 'org.greenrobot:greendao:3.2.0'
+    compile 'org.greenrobot:greendao-generator:3.0.0'
+    compile files('libs/alipaysdk.jar')
+    compile files('libs/alipaysecsdk.jar')
+    compile files('libs/alipayutdid.jar')
 
     compile 'cn.jiguang.sdk:jpush:3.0.3'  // 极光此处以JPush 3.0.3 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.1.1'  // 极光此处以JCore 1.1.1 版本为例。

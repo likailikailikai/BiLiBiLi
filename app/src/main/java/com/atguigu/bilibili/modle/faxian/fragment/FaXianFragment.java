@@ -15,7 +15,6 @@ import com.atguigu.bilibili.R;
 import com.atguigu.bilibili.view.base.BaseFragment;
 import com.atguigu.bilibili.modle.faxian.activity.InterestActivity;
 import com.atguigu.bilibili.modle.faxian.mall.avtivity.MallActivity;
-import com.atguigu.bilibili.modle.faxian.mall.avtivity.MallWebViewActivity;
 import com.atguigu.bilibili.modle.faxian.activity.OriginalRankActivity;
 import com.atguigu.bilibili.modle.faxian.activity.TopicActivity;
 import com.atguigu.bilibili.modle.faxian.bean.FaXianBean;
@@ -254,7 +253,7 @@ public class FaXianFragment extends BaseFragment {
             case R.id.ll_zhoubian_shop:
 //                Toast.makeText(mContext, "周边商城", Toast.LENGTH_SHORT).show();
 
-                Intent intent5 = new Intent(mContext,MallWebViewActivity.class);
+                Intent intent5 = new Intent(mContext,MallActivity.class);
                 mContext.startActivity(intent5);
                 break;
         }

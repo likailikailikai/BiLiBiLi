@@ -132,10 +132,19 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".modle.faxian.activity.DistrictActivity" />
         <activity android:name=".view.activity.LoginActivity" />
-        <activity android:name=".modle.faxian.mall.avtivity.MallWebViewActivity" />
         <activity android:name=".modle.faxian.mall.avtivity.MallActivity" />
         <activity android:name=".modle.faxian.mall.avtivity.GoodsInfoActivity"></activity>
         <activity android:name=".download.DownloadListActivity"></activity>
+
+        <!-- alipay sdk begin -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <!-- alipay sdk end -->
+
     </application>
 
 </manifest>

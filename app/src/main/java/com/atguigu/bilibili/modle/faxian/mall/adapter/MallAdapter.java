@@ -1,24 +1,20 @@
 package com.atguigu.bilibili.modle.faxian.mall.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.atguigu.bilibili.R;
-import com.atguigu.bilibili.modle.faxian.mall.bean.MallbannerBean;
-import com.atguigu.bilibili.modle.faxian.mall.bean.MallgirdBean;
-import com.atguigu.bilibili.view.view.MyGridView;
+import com.atguigu.bilibili.modle.faxian.mall.avtivity.GoodsInfoActivity;
+import com.atguigu.bilibili.modle.faxian.mall.bean.HomepageBean;
 import com.bumptech.glide.Glide;
-import com.youth.banner.Banner;
-import com.youth.banner.loader.ImageLoader;
-import com.youth.banner.transformer.BackgroundToForegroundTransformer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -30,150 +26,65 @@ import butterknife.InjectView;
  * 作用：
  */
 
-public class MallAdapter extends RecyclerView.Adapter {
+public class MallAdapter extends RecyclerView.Adapter<MallAdapter.ViewHolder> {
 
+    public static final String IMAGE = "image";
+    public static final String NAME = "name";
+    public static final String MONEY = "money";
 
-    public static final int BANNER = 0;
-    public static final int MALLGIRD = 1;
     private final Context mContext;
-    private final LayoutInflater inflater;
-    private final MallbannerBean.ResultBean result;
-    private final MallgirdBean.ResultBean result2;
+    private final List<HomepageBean.ResultBean.RecordsBean> datas;
 
-
-    /**
-     * 当前类型
-     */
-    public int currentType = BANNER;
-
-
-    public MallAdapter(Context mContext, MallbannerBean.ResultBean result, MallgirdBean.ResultBean result2) {
+    public MallAdapter(Context mContext, List<HomepageBean.ResultBean.RecordsBean> records) {
         this.mContext = mContext;
-        this.result = result;
-        this.result2 = result2;
-
-        inflater = LayoutInflater.from(mContext);
+        this.datas = records;
     }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.home_adapter, parent, false));
+    }
+
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final HomepageBean.ResultBean.RecordsBean Bean = datas.get(position);
+
+        Glide.with(mContext).load(Bean.getImgUrl()).into(holder.ivImage);
+        holder.tvMoney.setText(Bean.getSalvePrice() + "");
+        holder.tvName.setText(Bean.getTitle());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, GoodsInfoActivity.class);
+                intent.putExtra(IMAGE, Bean);
+//                intent.putExtra(NAME,Bean.getTitle());
+//                intent.putExtra(MONEY,Bean.getSalvePrice()+"");
+                mContext.startActivity(intent);
+            }
+        });
+
+    }
+
 
     @Override
     public int getItemCount() {
-        return 2;
+        return datas.size();
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        if (position == BANNER) {
-            currentType = BANNER;
-        } else if (position == MALLGIRD) {
-            currentType = MALLGIRD;
-        }
-        return currentType;
-    }
+    class ViewHolder extends RecyclerView.ViewHolder {
+        @InjectView(R.id.iv_image)
+        ImageView ivImage;
+        @InjectView(R.id.card_view)
+        CardView cardView;
+        @InjectView(R.id.tv_name)
+        TextView tvName;
+        @InjectView(R.id.tv_money)
+        TextView tvMoney;
 
-
-    /**
-     * 当前的类型
-     *
-     * @param parent
-     * @param viewType
-     * @return
-     */
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        if (viewType == BANNER) {
-            return new BannerViewHolder(mContext, inflater.inflate(R.layout.mall_banner_viewpager, null));
-        } else if (viewType == MALLGIRD) {
-            return new MallGirdViewHolder(mContext, inflater.inflate(R.layout.mall_gird_viewpager, null));
-        }
-
-        return null;
-    }
-
-    /**
-     * 绑定数据
-     *
-     * @param holder
-     * @param position
-     */
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (getItemViewType(position) == BANNER) {
-            BannerViewHolder viewHolder = (BannerViewHolder) holder;
-            //绑定数据
-            viewHolder.setData(result.getModelDetails());
-        } else if (getItemViewType(position) == MALLGIRD) {
-            MallGirdViewHolder viewHolder = (MallGirdViewHolder) holder;
-            //绑定数据
-            viewHolder.setData(result2.getRecords());
-        }
-    }
-
-    class MallGirdViewHolder extends RecyclerView.ViewHolder {
-
-        private final Context mContext;
-        @InjectView(R.id.btn)
-        Button btn;
-        @InjectView(R.id.gv_mall)
-        MyGridView gvMall;
-
-        private MallgirdAdapter mallgirdAdapter;
-
-        public MallGirdViewHolder(Context mContext, View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
-            this.mContext = mContext;
             ButterKnife.inject(this, itemView);
         }
-
-        public void setData(final List<MallgirdBean.ResultBean.RecordsBean> records) {
-
-            mallgirdAdapter = new MallgirdAdapter(mContext, records);
-            gvMall.setAdapter(mallgirdAdapter);
-
-
-        }
     }
-
-
-    class BannerViewHolder extends RecyclerView.ViewHolder {
-
-        private final Context mContext;
-        private Banner banner;
-
-        public BannerViewHolder(Context mContext, View itemView) {
-            super(itemView);
-            this.mContext = mContext;
-            ButterKnife.inject(this, itemView);
-            banner = (Banner) itemView.findViewById(R.id.banner);
-        }
-
-        public void setData(List<MallbannerBean.ResultBean.ModelDetailsBean> modelDetails) {
-            //设置banner数据
-            List<String> images = new ArrayList<>();
-            for (int i = 0; i < modelDetails.size(); i++) {
-                images.add(modelDetails.get(i).getSmallImageUrl());
-            }
-            //简单使用
-            banner.setImages(images)
-                    .setImageLoader(new ImageLoader() {
-                        @Override
-                        public void displayImage(Context context, Object path, ImageView imageView) {
-                            //具体方法内容自己去选择，次方法是为了减少banner过多的依赖第三方包，所以将这个权限开放给使用者去选择
-                            Glide
-                                    .with(context)
-                                    .load(path)
-                                    .crossFade()
-                                    .into(imageView);
-                        }
-                    })
-                    .start();
-            Log.e("TAG", "开始banner");
-            //设置样式
-            banner.setBannerAnimation(BackgroundToForegroundTransformer.class);
-            //3、设置banner的点击事件
-
-
-        }
-    }
-
 }

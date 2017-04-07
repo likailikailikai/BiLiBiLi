@@ -10,7 +10,7 @@ public class Constants {
 
     public static final String URL = "url";
     public static final String TITLE = "TITLE";
-    public static final String TUPIAN = "tupian";
+    public static final String IMAGE = "image";
     public static final String NAME = "name";
     public static final String PRICE = "price";
 
