@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
 
 import com.atguigu.bilibili.R;
 
@@ -33,20 +36,32 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     @InjectView(R.id.activity_login)
     LinearLayout activityLogin;
+    @InjectView(R.id.et_user)
+    EditText etuser;
+    @InjectView(R.id.et_password)
+    EditText etpassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
+        initData();
     }
+
+    private void initData() {
+    }
+
 
     @OnClick({R.id.iv_back_login, R.id.forget_password, R.id.zhuce, R.id.login})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back_login:
+                finish();
                 break;
             case R.id.forget_password:
+                Toast.makeText(LoginActivity.this, "忘记密码", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.zhuce:
                 break;
